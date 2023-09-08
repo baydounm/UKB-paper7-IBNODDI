@@ -4,10 +4,10 @@ This repository includes supplementary and other information related to the manu
 Authors:
 May A. Beydoun; Hind A. Beydoun; Yi-Han Hu; Zhiguang Li; Claudia S. Wolf; Osorio Meirelles; Nicole Noren Hooten; Lenore J. Launer; Michele K. Evans; Alan B. Zonderman
 
-Currently under consideration in xxxx
+Published in Brain Behavior and Immunity. 
 
 The repository includes the following folders:
--- FIGURE2: Brain images and heatmaps and their scripts for Figure 2. 
+-- FIGURE2_GITHUB: Brain images and heatmaps and their scripts for Figure 2. 
 -- FIGURE5: .PPT and .gph files for Figure 5. 
 -- FIGURES1: Volcano plot Figure, script and data. 
 -- FIGURES2: Heatmap for correlation between NODDI measures (ROI-specific) with R script. 
