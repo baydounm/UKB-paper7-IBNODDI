@@ -16,6 +16,8 @@ The repository includes the following folders:
 -- SUPPLEMENTARY_DATA_FIGURE2SENS: Results dataset for sensitivity analysis for infection burden tertiles vs. NODDI measure regression models (Loge transformed, z-scores). 
 -- FIGURE3_4: Heatmaps by LE8 tertile and by AD PRS tertile, with datasets and scripts, along with summary results. 
 -- SUPPLEMENTARY_DATASHET1 through 4: additional excel or Stata datasets (results non-raw datasets) used in the manuscript. 
+-- OUTPUT: Main Stata output in smcl (and pdf where possible) format. 
+
 
 
 
