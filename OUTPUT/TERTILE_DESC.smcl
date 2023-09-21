@@ -1,0 +1,297 @@
+{smcl}
+{com}{sf}{ul off}{txt}
+{com}. 
+. use finaldata_imputedFINAL, clear
+{txt}
+{com}. 
+. mi extract 0
+{txt}
+{com}. 
+. save finaldata_unimputedFINAL, replace
+{txt}{p 0 4 2}
+file {bf}
+finaldata_unimputedFINAL.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. bysort AD_PGStert: su AD_PGS if sample_final==1, det
+
+{txt}{hline}
+-> AD_PGStert = 1
+
+                           AD_PGS
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res} -2.10557       -3.42374
+{txt} 5%    {res} -1.71627       -2.99177
+{txt}10%    {res} -1.50571        -2.9313       {txt}Obs         {res}     12,797
+{txt}25%    {res}  -1.1792       -2.79711       {txt}Sum of wgt. {res}     12,797
+
+{txt}50%    {res} -.877614                      {txt}Mean          {res}-.9592239
+                        {txt}Largest       Std. dev.     {res} .3863708
+{txt}75%    {res} -.650822       -.462045
+{txt}90%    {res} -.534705       -.461964       {txt}Variance      {res} .1492824
+{txt}95%    {res} -.497281       -.461934       {txt}Skewness      {res} -1.05068
+{txt}99%    {res} -.469429       -.461857       {txt}Kurtosis      {res} 4.035616
+
+{txt}{hline}
+-> AD_PGStert = 2
+
+                           AD_PGS
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}  -.45449       -.461829
+{txt} 5%    {res} -.426809       -.461786
+{txt}10%    {res}-.3916275       -.461676       {txt}Obs         {res}     12,910
+{txt}25%    {res} -.283421       -.461672       {txt}Sum of wgt. {res}     12,910
+
+{txt}50%    {res} -.105623                      {txt}Mean          {res}-.0964286
+                        {txt}Largest       Std. dev.     {res} .2188937
+{txt}75%    {res} .0882623          .3108
+{txt}90%    {res} .2126325        .310837       {txt}Variance      {res} .0479145
+{txt}95%    {res}  .261783        .310891       {txt}Skewness      {res} .1021085
+{txt}99%    {res}  .300759        .310986       {txt}Kurtosis      {res} 1.845959
+
+{txt}{hline}
+-> AD_PGStert = 3
+
+                           AD_PGS
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}  .319551        .311114
+{txt} 5%    {res}  .361772        .311136
+{txt}10%    {res}  .416757        .311225       {txt}Obs         {res}     13,096
+{txt}25%    {res} .5925105        .311238       {txt}Sum of wgt. {res}     13,096
+
+{txt}50%    {res}  .992496                      {txt}Mean          {res} 1.146985
+                        {txt}Largest       Std. dev.     {res} .6875983
+{txt}75%    {res}  1.54355        4.30809
+{txt}90%    {res}  2.08029        4.32481       {txt}Variance      {res} .4727915
+{txt}95%    {res}  2.46189        4.38548       {txt}Skewness      {res} 1.141993
+{txt}99%    {res}  3.36483        4.98366       {txt}Kurtosis      {res} 4.304437
+
+{txt}{hline}
+-> AD_PGStert = .
+
+                           AD_PGS
+{hline 61}
+no observations
+
+
+{com}. 
+. bysort LE8_TOTALSCOREtert: su LE8_TOTALSCORE if sample_final==1, det
+
+{txt}{hline}
+-> LE8_TOTALSCOREtert = 1
+
+                       LE8_TOTALSCORE
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}      265            120
+{txt} 5%    {res}      320            155
+{txt}10%    {res}    352.5            155       {txt}Obs         {res}     12,190
+{txt}25%    {res}      395            155       {txt}Sum of wgt. {res}     12,190
+
+{txt}50%    {res}      435                      {txt}Mean          {res} 424.5069
+                        {txt}Largest       Std. dev.     {res} 51.50253
+{txt}75%    {res}      465            485
+{txt}90%    {res}      480            485       {txt}Variance      {res}  2652.51
+{txt}95%    {res}      480            485       {txt}Skewness      {res} -1.20525
+{txt}99%    {res}      485            485       {txt}Kurtosis      {res} 4.497519
+
+{txt}{hline}
+-> LE8_TOTALSCOREtert = 2
+
+                       LE8_TOTALSCORE
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res} 485.7143       485.7143
+{txt} 5%    {res}      490       485.7143
+{txt}10%    {res}      495       485.7143       {txt}Obs         {res}     12,806
+{txt}25%    {res} 508.5714       485.7143       {txt}Sum of wgt. {res}     12,806
+
+{txt}50%    {res}      530                      {txt}Mean          {res}  527.577
+                        {txt}Largest       Std. dev.     {res} 22.98039
+{txt}75%    {res} 548.5714       565.7143
+{txt}90%    {res}      560       565.7143       {txt}Variance      {res} 528.0983
+{txt}95%    {res}      565       565.7143       {txt}Skewness      {res}-.0290003
+{txt}99%    {res} 565.7143       565.7143       {txt}Kurtosis      {res}  1.83296
+
+{txt}{hline}
+-> LE8_TOTALSCOREtert = 3
+
+                       LE8_TOTALSCORE
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}      570       566.6667
+{txt} 5%    {res} 571.4286       566.6667
+{txt}10%    {res}      575       566.6667       {txt}Obs         {res}     13,807
+{txt}25%    {res}      590       566.6667       {txt}Sum of wgt. {res}     13,807
+
+{txt}50%    {res} 617.1429                      {txt}Mean          {res} 626.7739
+                        {txt}Largest       Std. dev.     {res} 44.59289
+{txt}75%    {res}      655            800
+{txt}90%    {res}      690            800       {txt}Variance      {res} 1988.526
+{txt}95%    {res} 714.2857            800       {txt}Skewness      {res}  .884884
+{txt}99%    {res} 754.2857            800       {txt}Kurtosis      {res} 3.304058
+
+{txt}{hline}
+-> LE8_TOTALSCOREtert = .
+
+                       LE8_TOTALSCORE
+{hline 61}
+no observations
+
+
+{com}. 
+. bysort infectionburdentert: su infectionburden if sample_final==1, det
+
+{txt}{hline}
+-> infectionburdentert = 1
+
+                       infectionburden
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        0              0
+{txt} 5%    {res}        0              0
+{txt}10%    {res}        0              0       {txt}Obs         {res}     20,380
+{txt}25%    {res}        0              0       {txt}Sum of wgt. {res}     20,380
+
+{txt}50%    {res}        0                      {txt}Mean          {res}        0
+                        {txt}Largest       Std. dev.     {res}        0
+{txt}75%    {res}        0              0
+{txt}90%    {res}        0              0       {txt}Variance      {res}        0
+{txt}95%    {res}        0              0       {txt}Skewness      {res}        .
+{txt}99%    {res}        0              0       {txt}Kurtosis      {res}        .
+
+{txt}{hline}
+-> infectionburdentert = 2
+
+                       infectionburden
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        1              1
+{txt} 5%    {res}        1              1
+{txt}10%    {res}        1              1       {txt}Obs         {res}      6,971
+{txt}25%    {res}        1              1       {txt}Sum of wgt. {res}      6,971
+
+{txt}50%    {res}        1                      {txt}Mean          {res}        1
+                        {txt}Largest       Std. dev.     {res}        0
+{txt}75%    {res}        1              1
+{txt}90%    {res}        1              1       {txt}Variance      {res}        0
+{txt}95%    {res}        1              1       {txt}Skewness      {res}        .
+{txt}99%    {res}        1              1       {txt}Kurtosis      {res}        .
+
+{txt}{hline}
+-> infectionburdentert = 3
+
+                       infectionburden
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        2              2
+{txt} 5%    {res}        2              2
+{txt}10%    {res}        2              2       {txt}Obs         {res}     11,452
+{txt}25%    {res}        2              2       {txt}Sum of wgt. {res}     11,452
+
+{txt}50%    {res}        3                      {txt}Mean          {res} 3.377751
+                        {txt}Largest       Std. dev.     {res} 1.593363
+{txt}75%    {res}        4             13
+{txt}90%    {res}        5             14       {txt}Variance      {res} 2.538805
+{txt}95%    {res}        6             14       {txt}Skewness      {res} 1.662975
+{txt}99%    {res}        9             15       {txt}Kurtosis      {res} 6.873528
+
+{txt}{hline}
+-> infectionburdentert = .
+
+                       infectionburden
+{hline 61}
+no observations
+
+
+{com}. 
+. bysort infectionburdenhosptert: su infectionburdenhosp if sample_final==1, det
+
+{txt}{hline}
+-> infectionburdenhosptert = 1
+
+                     infectionburdenhosp
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        0              0
+{txt} 5%    {res}        0              0
+{txt}10%    {res}        0              0       {txt}Obs         {res}     35,013
+{txt}25%    {res}        0              0       {txt}Sum of wgt. {res}     35,013
+
+{txt}50%    {res}        0                      {txt}Mean          {res}        0
+                        {txt}Largest       Std. dev.     {res}        0
+{txt}75%    {res}        0              0
+{txt}90%    {res}        0              0       {txt}Variance      {res}        0
+{txt}95%    {res}        0              0       {txt}Skewness      {res}        .
+{txt}99%    {res}        0              0       {txt}Kurtosis      {res}        .
+
+{txt}{hline}
+-> infectionburdenhosptert = 3
+
+                     infectionburdenhosp
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}        1              1
+{txt} 5%    {res}        1              1
+{txt}10%    {res}        1              1       {txt}Obs         {res}      3,790
+{txt}25%    {res}        1              1       {txt}Sum of wgt. {res}      3,790
+
+{txt}50%    {res}        2                      {txt}Mean          {res} 2.384169
+                        {txt}Largest       Std. dev.     {res} 1.767769
+{txt}75%    {res}        3             12
+{txt}90%    {res}        5             12       {txt}Variance      {res} 3.125007
+{txt}95%    {res}        6             13       {txt}Skewness      {res} 1.807115
+{txt}99%    {res}        9             15       {txt}Kurtosis      {res} 7.332064
+
+{txt}{hline}
+-> infectionburdenhosptert = .
+
+                     infectionburdenhosp
+{hline 61}
+no observations
+
+
+{com}. 
+. tab infectionburdentert infectionburdenhosptert if sample_final==1, col row chi
+{txt}
+{c TLC}{hline 19}{c TRC}
+{c |} Key{col 21}{c |}
+{c LT}{hline 19}{c RT}
+{c |}{space 5}{it:frequency}{col 21}{c |}
+{c |}{space 2}{it:row percentage}{col 21}{c |}
+{c |}{space 1}{it:column percentage}{col 21}{c |}
+{c BLC}{hline 19}{c BRC}
+
+         3 {c |}
+ quantiles {c |}
+        of {c |}    3 quantiles of
+infectionb {c |} infectionburdenhosp 
+    urden  {c |}         1          3 {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+         1 {c |}{res}    20,380          0 {txt}{c |}{res}    20,380 
+           {txt}{c |}{res}    100.00       0.00 {txt}{c |}{res}    100.00 
+           {txt}{c |}{res}     58.21       0.00 {txt}{c |}{res}     52.52 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+         2 {c |}{res}     5,352      1,619 {txt}{c |}{res}     6,971 
+           {txt}{c |}{res}     76.78      23.22 {txt}{c |}{res}    100.00 
+           {txt}{c |}{res}     15.29      42.72 {txt}{c |}{res}     17.97 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+         3 {c |}{res}     9,281      2,171 {txt}{c |}{res}    11,452 
+           {txt}{c |}{res}     81.04      18.96 {txt}{c |}{res}    100.00 
+           {txt}{c |}{res}     26.51      57.28 {txt}{c |}{res}     29.51 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}    35,013      3,790 {txt}{c |}{res}    38,803 
+           {txt}{c |}{res}     90.23       9.77 {txt}{c |}{res}    100.00 
+           {txt}{c |}{res}    100.00     100.00 {txt}{c |}{res}    100.00 
+
+{txt}          Pearson chi2({res}2{txt}) = {res} 4.7e+03  {txt} Pr = {res}0.000
+{txt}
+{com}. 
+. capture log close
+{smcl}
+{com}{sf}{ul off}

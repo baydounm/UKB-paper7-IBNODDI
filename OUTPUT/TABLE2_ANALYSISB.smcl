@@ -1,0 +1,323 @@
+{smcl}
+{com}{sf}{ul off}{txt}
+{com}. 
+. 
+. 
+. **ANALYSIS B: **
+. 
+. use finaldata_imputedFINAL, clear
+{txt}
+{com}. 
+. mi extract 0
+{txt}
+{com}. 
+. save finaldata_unimputedFINAL, replace
+{txt}{p 0 4 2}
+file {bf}
+finaldata_unimputedFINAL.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. **foreach y1 of varlist FA_mean MD_mean {c -(}
+. **reg `y1' infectionburden AGE SEX  i.RACE_ETHN AD_PGS householdsize TIME_V0V2  invmillsMRIINF if sample_final==1
+. **{c )-}
+. 
+. 
+. global tflist ""
+{txt}
+{com}. global modseq=0
+{txt}
+{com}. foreach X of var infectionburdentert {c -(}
+{txt}  2{com}. foreach Y of var ISOVF_mean ICVF_mean OD_mean  {c -(}
+{txt}  3{com}. global modseq=$modseq+1
+{txt}  4{com}. tempfile tfcur
+{txt}  5{com}. parmby "regr `Y' `X'  AGE SEX  NonWhite AD_PGS householdsize TIME_V0V2  invmillsMRIINF if sample_final==1, beta", label command format(estimate min95 max95 %8.2f p %8.1e) idn($modseq) saving(`"`tfcur'"', replace) flist(tflist)
+{txt}  6{com}.  {c )-}
+{txt}  7{com}.  {c )-}
+{txt}Command: {res}regr ISOVF_mean infectionburdentert  AGE SEX  NonWhite AD_PGS householdsize TIME_V0V2  invmillsMRIINF if sample_final==1, beta
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    38,705
+{txt}{hline 13}{c +}{hline 34}   F(8, 38696)     = {res}  1213.46
+{txt}       Model {c |} {res} 1.34003908         8  .167504885   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 5.34156468    38,696  .000138039   {txt}R-squared       ={res}    0.2006
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2004
+{txt}       Total {c |} {res} 6.68160376    38,704  .000172633   {txt}Root MSE        =   {res} .01175
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         ISOVF_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 74}        Beta
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2} .0003132{col 33}{space 2} .0000683{col 44}{space 1}    4.59{col 53}{space 3}0.000{col 74}{space 3} .0208875
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2} .0007328{col 33}{space 2} 8.59e-06{col 44}{space 1}   85.35{col 53}{space 3}0.000{col 74}{space 3} .4189682
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2} -.001516{col 33}{space 2} .0001205{col 44}{space 1}  -12.58{col 53}{space 3}0.000{col 74}{space 3}-.0575875
+{txt}{space 11}NonWhite {c |}{col 21}{res}{space 2} .0003406{col 33}{space 2} .0007667{col 44}{space 1}    0.44{col 53}{space 3}0.657{col 74}{space 3} .0020223
+{txt}{space 13}AD_PGS {c |}{col 21}{res}{space 2} .0000893{col 33}{space 2} .0000606{col 44}{space 1}    1.47{col 53}{space 3}0.140{col 74}{space 3} .0067064
+{txt}{space 6}householdsize {c |}{col 21}{res}{space 2}-.0002261{col 33}{space 2} .0000526{col 44}{space 1}   -4.30{col 53}{space 3}0.000{col 74}{space 3}-.0210053
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2} 2.35e-06{col 33}{space 2} 9.43e-08{col 44}{space 1}   24.88{col 53}{space 3}0.000{col 74}{space 3} .1132148
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2}-4.73e-07{col 33}{space 2} 5.24e-07{col 44}{space 1}   -0.90{col 53}{space 3}0.367{col 74}{space 3} -.004104
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .0484476{col 33}{space 2} .0010035{col 44}{space 1}   48.28{col 53}{space 3}0.000{col 74}{space 3}        .
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}{p 0 4 2}
+(file {bf}
+C:\Users\baydounm\AppData\Local\Temp\ST_62c8_000001.tmp{rm}
+not found)
+{p_end}
+{p 0 4 2}
+file {bf}
+C:\Users\baydounm\AppData\Local\Temp\ST_62c8_000001.tmp{rm}
+saved
+as .dta format
+{p_end}
+Command: {res}regr ICVF_mean infectionburdentert  AGE SEX  NonWhite AD_PGS householdsize TIME_V0V2  invmillsMRIINF if sample_final==1, beta
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    38,705
+{txt}{hline 13}{c +}{hline 34}   F(8, 38696)     = {res}   482.88
+{txt}       Model {c |} {res}  2.7077124         8   .33846405   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  27.123009    38,696  .000700925   {txt}R-squared       ={res}    0.0908
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0906
+{txt}       Total {c |} {res} 29.8307214    38,704   .00077074   {txt}Root MSE        =   {res} .02647
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}          ICVF_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 74}        Beta
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2}-.0000618{col 33}{space 2} .0001539{col 44}{space 1}   -0.40{col 53}{space 3}0.688{col 74}{space 3}  -.00195
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2}-.0010984{col 33}{space 2} .0000193{col 44}{space 1}  -56.77{col 53}{space 3}0.000{col 74}{space 3}-.2972033
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2}-.0002798{col 33}{space 2} .0002715{col 44}{space 1}   -1.03{col 53}{space 3}0.303{col 74}{space 3}-.0050304
+{txt}{space 11}NonWhite {c |}{col 21}{res}{space 2}-.0017346{col 33}{space 2} .0017277{col 44}{space 1}   -1.00{col 53}{space 3}0.315{col 74}{space 3}-.0048744
+{txt}{space 13}AD_PGS {c |}{col 21}{res}{space 2}-.0003053{col 33}{space 2} .0001365{col 44}{space 1}   -2.24{col 53}{space 3}0.025{col 74}{space 3}-.0108483
+{txt}{space 6}householdsize {c |}{col 21}{res}{space 2} .0002569{col 33}{space 2} .0001185{col 44}{space 1}    2.17{col 53}{space 3}0.030{col 74}{space 3} .0112951
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2}-8.05e-08{col 33}{space 2} 2.13e-07{col 44}{space 1}   -0.38{col 53}{space 3}0.705{col 74}{space 3} -.001839
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2} 3.73e-07{col 33}{space 2} 1.18e-06{col 44}{space 1}    0.32{col 53}{space 3}0.752{col 74}{space 3} .0015324
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .6746145{col 33}{space 2} .0022612{col 44}{space 1}  298.34{col 53}{space 3}0.000{col 74}{space 3}        .
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}{p 0 4 2}
+(file {bf}
+C:\Users\baydounm\AppData\Local\Temp\ST_62c8_000002.tmp{rm}
+not found)
+{p_end}
+{p 0 4 2}
+file {bf}
+C:\Users\baydounm\AppData\Local\Temp\ST_62c8_000002.tmp{rm}
+saved
+as .dta format
+{p_end}
+Command: {res}regr OD_mean infectionburdentert  AGE SEX  NonWhite AD_PGS householdsize TIME_V0V2  invmillsMRIINF if sample_final==1, beta
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    38,705
+{txt}{hline 13}{c +}{hline 34}   F(8, 38696)     = {res}   393.04
+{txt}       Model {c |} {res} .207283759         8   .02591047   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  2.5509386    38,696  .000065923   {txt}R-squared       ={res}    0.0752
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0750
+{txt}       Total {c |} {res} 2.75822236    38,704  .000071265   {txt}Root MSE        =   {res} .00812
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}            OD_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 74}        Beta
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2} .0001996{col 33}{space 2} .0000472{col 44}{space 1}    4.23{col 53}{space 3}0.000{col 74}{space 3} .0207149
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2} .0002396{col 33}{space 2} 5.93e-06{col 44}{space 1}   40.38{col 53}{space 3}0.000{col 74}{space 3} .2132099
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2} .0003675{col 33}{space 2} .0000833{col 44}{space 1}    4.41{col 53}{space 3}0.000{col 74}{space 3} .0217264
+{txt}{space 11}NonWhite {c |}{col 21}{res}{space 2}-.0026175{col 33}{space 2} .0005298{col 44}{space 1}   -4.94{col 53}{space 3}0.000{col 74}{space 3}-.0241885
+{txt}{space 13}AD_PGS {c |}{col 21}{res}{space 2} .0000419{col 33}{space 2} .0000419{col 44}{space 1}    1.00{col 53}{space 3}0.317{col 74}{space 3} .0048992
+{txt}{space 6}householdsize {c |}{col 21}{res}{space 2}-.0002076{col 33}{space 2} .0000363{col 44}{space 1}   -5.71{col 53}{space 3}0.000{col 74}{space 3}-.0300164
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2} 2.14e-06{col 33}{space 2} 6.52e-08{col 44}{space 1}   32.82{col 53}{space 3}0.000{col 74}{space 3} .1606379
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2}-3.26e-07{col 33}{space 2} 3.62e-07{col 44}{space 1}   -0.90{col 53}{space 3}0.368{col 74}{space 3} -.004399
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .1094786{col 33}{space 2} .0006935{col 44}{space 1}  157.87{col 53}{space 3}0.000{col 74}{space 3}        .
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}{p 0 4 2}
+(file {bf}
+C:\Users\baydounm\AppData\Local\Temp\ST_62c8_000003.tmp{rm}
+not found)
+{p_end}
+{p 0 4 2}
+file {bf}
+C:\Users\baydounm\AppData\Local\Temp\ST_62c8_000003.tmp{rm}
+saved
+as .dta format
+{p_end}
+
+{com}.  
+. drop _all
+{txt}
+{com}. append using $tflist
+{txt}
+{com}. sort idnum command `Y' parmseq
+{txt}
+{com}. describe
+
+{txt}Contains data
+ Observations:{res}            27                  
+{txt}    Variables:{res}            12                  
+{txt}{hline}
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+{hline}
+{p 0 48}{res}{bind:parmseq        }{txt}{bind: byte    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}Parameter sequence number{p_end}
+{p 0 48}{bind:command        }{txt}{bind: str126  }{bind:{txt}%126s     }{space 1}{bind:         }{bind:  }{res}{res}Estimation command{p_end}
+{p 0 48}{bind:idnum          }{txt}{bind: byte    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Numeric ID{p_end}
+{p 0 48}{bind:parm           }{txt}{bind: str19   }{bind:{txt}%19s      }{space 1}{bind:         }{bind:  }{res}{res}Parameter name{p_end}
+{p 0 48}{bind:label          }{txt}{bind: str31   }{bind:{txt}%31s      }{space 1}{bind:         }{bind:  }{res}{res}Parameter label{p_end}
+{p 0 48}{bind:estimate       }{txt}{bind: double  }{bind:{txt}%8.2f     }{space 1}{bind:         }{bind:  }{res}{res}Parameter estimate{p_end}
+{p 0 48}{bind:stderr         }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}SE of parameter estimate{p_end}
+{p 0 48}{bind:dof            }{txt}{bind: long    }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}Degrees of freedom{p_end}
+{p 0 48}{bind:t              }{txt}{bind: double  }{bind:{txt}%10.0g    }{space 1}{bind:         }{bind:  }{res}{res}t-test statistic{p_end}
+{p 0 48}{bind:p              }{txt}{bind: double  }{bind:{txt}%8.1e     }{space 1}{bind:         }{bind:  }{res}{res}P-value{p_end}
+{p 0 48}{bind:min95          }{txt}{bind: double  }{bind:{txt}%8.2f     }{space 1}{bind:         }{bind:  }{res}{res}Lower 95% confidence limit{p_end}
+{p 0 48}{bind:max95          }{txt}{bind: double  }{bind:{txt}%8.2f     }{space 1}{bind:         }{bind:  }{res}{res}Upper 95% confidence limit{p_end}
+{txt}{hline}
+Sorted by: {res}idnum  command  parmseq
+     Note: Dataset has changed since last saved.
+{txt}
+{com}. by idnum command:list `Y' parm label estimate min95 max95 p, noobs
+
+{txt}{hline}
+-> idnum = 1, command = regr ISOVF_mean infectionburdentert  A..
+
+  {c TLC}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c TRC}
+  {c |} {res}               parm                             label   estimate   min95   max95         p {txt}{c |}
+  {c LT}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c RT}
+  {c |} {res}infectionburdentert   3 quantiles of infectionburden        0.00    0.00    0.00   4.5e-06 {txt}{c |}
+  {c |} {res}                AGE                                         0.00    0.00    0.00   0.0e+00 {txt}{c |}
+  {c |} {res}                SEX                                        -0.00   -0.00   -0.00   3.1e-36 {txt}{c |}
+  {c |} {res}           NonWhite                                         0.00   -0.00    0.00   6.6e-01 {txt}{c |}
+  {c |} {res}             AD_PGS                                         0.00   -0.00    0.00   1.4e-01 {txt}{c |}
+  {c LT}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c RT}
+  {c |} {res}      householdsize       Number of household members      -0.00   -0.00   -0.00   1.7e-05 {txt}{c |}
+  {c |} {res}          TIME_V0V2                                         0.00    0.00    0.00   2.e-135 {txt}{c |}
+  {c |} {res}     invmillsMRIINF                                        -0.00   -0.00    0.00   3.7e-01 {txt}{c |}
+  {c |} {res}              _cons                          Constant       0.05    0.05    0.05   0.0e+00 {txt}{c |}
+  {c BLC}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c BRC}
+
+{hline}
+-> idnum = 2, command = regr ICVF_mean infectionburdentert  AG..
+
+  {c TLC}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c TRC}
+  {c |} {res}               parm                             label   estimate   min95   max95         p {txt}{c |}
+  {c LT}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c RT}
+  {c |} {res}infectionburdentert   3 quantiles of infectionburden       -0.00   -0.00    0.00   6.9e-01 {txt}{c |}
+  {c |} {res}                AGE                                        -0.00   -0.00   -0.00   0.0e+00 {txt}{c |}
+  {c |} {res}                SEX                                        -0.00   -0.00    0.00   3.0e-01 {txt}{c |}
+  {c |} {res}           NonWhite                                        -0.00   -0.01    0.00   3.2e-01 {txt}{c |}
+  {c |} {res}             AD_PGS                                        -0.00   -0.00   -0.00   2.5e-02 {txt}{c |}
+  {c LT}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c RT}
+  {c |} {res}      householdsize       Number of household members       0.00    0.00    0.00   3.0e-02 {txt}{c |}
+  {c |} {res}          TIME_V0V2                                        -0.00   -0.00    0.00   7.0e-01 {txt}{c |}
+  {c |} {res}     invmillsMRIINF                                         0.00   -0.00    0.00   7.5e-01 {txt}{c |}
+  {c |} {res}              _cons                          Constant       0.67    0.67    0.68   0.0e+00 {txt}{c |}
+  {c BLC}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c BRC}
+
+{hline}
+-> idnum = 3, command = regr OD_mean infectionburdentert  AGE ..
+
+  {c TLC}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c TRC}
+  {c |} {res}               parm                             label   estimate   min95   max95         p {txt}{c |}
+  {c LT}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c RT}
+  {c |} {res}infectionburdentert   3 quantiles of infectionburden        0.00    0.00    0.00   2.3e-05 {txt}{c |}
+  {c |} {res}                AGE                                         0.00    0.00    0.00   0.0e+00 {txt}{c |}
+  {c |} {res}                SEX                                         0.00    0.00    0.00   1.0e-05 {txt}{c |}
+  {c |} {res}           NonWhite                                        -0.00   -0.00   -0.00   7.8e-07 {txt}{c |}
+  {c |} {res}             AD_PGS                                         0.00   -0.00    0.00   3.2e-01 {txt}{c |}
+  {c LT}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c RT}
+  {c |} {res}      householdsize       Number of household members      -0.00   -0.00   -0.00   1.1e-08 {txt}{c |}
+  {c |} {res}          TIME_V0V2                                         0.00    0.00    0.00   6.e-233 {txt}{c |}
+  {c |} {res}     invmillsMRIINF                                        -0.00   -0.00    0.00   3.7e-01 {txt}{c |}
+  {c |} {res}              _cons                          Constant       0.11    0.11    0.11   0.0e+00 {txt}{c |}
+  {c BLC}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 7}{c -}{hline 7}{c -}{hline 9}{c BRC}
+
+
+{com}. 
+. save Outputdata_overall_B, replace
+{txt}{p 0 4 2}
+file {bf}
+Outputdata_overall_B.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. 
+. 
+. **Smile plot**
+. use Outputdata_overall_B, clear
+{txt}
+{com}. 
+. keep if parmseq==1
+{txt}(24 observations deleted)
+
+{com}. 
+. 
+. sort parm
+{txt}
+{com}. multproc, pval(p) meth(bonferroni) gpunc(uncp) gpcor(corp) rej(signif)
+
+{txt}Method: {res}bonferroni
+{txt}Uncorrected overall critical P-value: {res}.05
+{txt}Number of P-values: {res}3
+{txt}Corrected overall critical P-value: {res}.01666667
+{txt}Number of rejected P-values: {res}2
+{txt}
+{com}. smileplot7, est(estimate) pval(p) punc(uncp) pcor(corp) ptl(command)  t1(" ")
+
+{txt}Method: {res}userspecified
+{txt}Uncorrected overall critical P-value: {res}.05
+{txt}Number of P-values: {res}3
+{txt}Corrected overall critical P-value: {res}.01666667
+{txt}Number of rejected P-values: {res}2
+{txt}
+{com}. list if signif, nodisp
+{txt}
+     {c TLC}{hline 9}{c -}{hline 127}{c -}{hline 7}{c -}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 11}{c -}{hline 7}{c -}{hline 11}{c -}{hline 9}{c -}{hline 7}{c -}{hline 7}{c -}{hline 6}{c -}{hline 11}{c -}{hline 8}{c TRC}
+     {c |} {res}parmseq   command                                                                                                                         idnum                  parm                             label   estimate      stderr     dof           t         p   min95   max95   uncp        corp   signif {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 127}{c -}{hline 7}{c -}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 11}{c -}{hline 7}{c -}{hline 11}{c -}{hline 9}{c -}{hline 7}{c -}{hline 7}{c -}{hline 6}{c -}{hline 11}{c -}{hline 8}{c RT}
+  1. {c |} {res}      1   regr ISOVF_mean infectionburdentert  AGE SEX  NonWhite AD_PGS householdsize TIME_V0V2  invmillsMRIINF if sample_final==1, b..       1   infectionburdentert   3 quantiles of infectionburden        0.00   .00006829   38696   4.5870679   4.5e-06    0.00    0.00    .05   .01666667        1 {txt}{c |}
+  3. {c |} {res}      1   regr OD_mean infectionburdentert  AGE SEX  NonWhite AD_PGS householdsize TIME_V0V2  invmillsMRIINF if sample_final==1, beta         3   infectionburdentert   3 quantiles of infectionburden        0.00   .00004719   38696   4.2295224   2.3e-05    0.00    0.00    .05   .01666667        1 {txt}{c |}
+     {c BLC}{hline 9}{c -}{hline 127}{c -}{hline 7}{c -}{hline 21}{c -}{hline 33}{c -}{hline 10}{c -}{hline 11}{c -}{hline 7}{c -}{hline 11}{c -}{hline 9}{c -}{hline 7}{c -}{hline 7}{c -}{hline 6}{c -}{hline 11}{c -}{hline 8}{c BRC}
+
+{com}. 
+. 
+. 
+. //q-value: FDR//
+. 
+. capture drop myqvallargervolumes
+{txt}
+{com}. 
+. qqvalue p, method(simes) qvalue(myqvallargervolumes)
+{txt}
+{com}. sort myqvallargervolumes
+{txt}
+{com}. 
+. list parm myqvallargervolumes command p  estimate stderr if p<0.05
+
+     {txt}{c TLC}{hline 68}{c TT}{hline 58}{c TRC}
+  1. {c |}                                       parm                         {c |}                        myqvall~s                         {c |}
+     {c |}                        {res}infectionburdentert                         {txt}{c |}                        {res}.00001353                         {txt}{c |}
+     {c LT}{hline 68}{c BT}{hline 58}{c RT}
+     {c |} command                                                                                                                       {c |}
+     {c |} {res}regr ISOVF_mean infectionburdentert  AGE SEX  NonWhite AD_PGS householdsize TIME_V0V2  invmillsMRIINF if sample_final==1, b.. {txt}{c |}
+     {c LT}{hline 40}{c TT}{hline 42}{c TT}{hline 43}{c RT}
+     {c |}                      p                 {c |}                 estimate                 {c |}                    stderr                 {c |}
+     {c |}                {res}4.5e-06                 {txt}{c |}                 {res}    0.00                 {txt}{c |}                 {res}.00006829                 {txt}{c |}
+     {c BLC}{hline 40}{c BT}{hline 42}{c BT}{hline 43}{c BRC}
+
+     {c TLC}{hline 68}{c TT}{hline 58}{c TRC}
+  2. {c |}                                       parm                         {c |}                        myqvall~s                         {c |}
+     {c |}                        {res}infectionburdentert                         {txt}{c |}                        {res}.00003521                         {txt}{c |}
+     {c LT}{hline 68}{c BT}{hline 58}{c RT}
+     {c |} command                                                                                                                       {c |}
+     {c |} {res}regr OD_mean infectionburdentert  AGE SEX  NonWhite AD_PGS householdsize TIME_V0V2  invmillsMRIINF if sample_final==1, beta   {txt}{c |}
+     {c LT}{hline 40}{c TT}{hline 42}{c TT}{hline 43}{c RT}
+     {c |}                      p                 {c |}                 estimate                 {c |}                    stderr                 {c |}
+     {c |}                {res}2.3e-05                 {txt}{c |}                 {res}    0.00                 {txt}{c |}                 {res}.00004719                 {txt}{c |}
+     {c BLC}{hline 40}{c BT}{hline 42}{c BT}{hline 43}{c BRC}
+
+{com}. 
+. 
+. save, replace
+{txt}{p 0 4 2}
+file {bf}
+Outputdata_overall_B.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. capture log close
+{smcl}
+{com}{sf}{ul off}

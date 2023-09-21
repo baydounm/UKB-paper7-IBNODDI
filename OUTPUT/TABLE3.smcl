@@ -1,0 +1,613 @@
+{smcl}
+{com}{sf}{ul off}{txt}
+{com}. 
+. 
+. *********************************************TABLE 3: INFECTION BURDEN VS. NODDI MEASURES,  BY AD PGS TERTILE***********************************************************************
+. 
+. use finaldata_imputedFINAL, clear
+{txt}
+{com}. 
+. 
+. **Main exposures: infectionburdentert 
+. **Main outcomes: FA_mean MD_mean 
+. **Main covariates: 
+. **invmillsMRIINF
+. **AGE SEX  i.RACE_ETHN AD_PGS householdsize TIME_V0V2 
+. **ICV: for sub-coritcal volumes
+. **i.educationbr townsend i.householdincome 
+. 
+. 
+. **Main effect modifier: AD_PGStert 
+. 
+. 
+. 
+. **************INFECTION BURDEN************************************
+. 
+. 
+. 
+. ************AD PGS LOWEST TERTILE**********************
+. 
+. foreach y1 of varlist ISOVF_mean ICVF_mean OD_mean {c -(}
+{txt}  2{com}. mi estimate:reg `y1' c.infectionburdentert AGE SEX  i.RACE_ETHN householdsize TIME_V0V2 i.educationbr townsend i.householdincome  LE8_TOTALSCORE invmillsMRIINF if sample_final==1 & AD_PGStert==1
+{txt}  3{com}. {c )-}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    12,797
+{txt}{col 49}Average RVI{col 67}= {res}    0.0498
+{txt}{col 49}Largest FMI{col 67}= {res}    0.2210
+{txt}{col 49}Complete DF{col 67}= {res}     12779
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}     94.50
+{txt}{col 49}        avg{col 67}= {res}  8,370.19
+{txt}{col 49}        max{col 67}= {res} 12,775.58
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  17{txt},{res} 8353.2{txt}){col 67}= {res}    189.12
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         ISOVF_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2} .0003462{col 33}{space 2} .0001182{col 44}{space 1}    2.93{col 53}{space 3}0.003{col 61}{space 4} .0001145{col 74}{space 3} .0005779
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2} .0007278{col 33}{space 2} .0000154{col 44}{space 1}   47.28{col 53}{space 3}0.000{col 61}{space 4} .0006977{col 74}{space 3}  .000758
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2}-.0014583{col 33}{space 2} .0002128{col 44}{space 1}   -6.85{col 53}{space 3}0.000{col 61}{space 4}-.0018755{col 74}{space 3}-.0010412
+{txt}{space 19} {c |}
+{space 10}RACE_ETHN {c |}
+{space 17}1  {c |}{col 21}{res}{space 2}-.0003075{col 33}{space 2} .0011635{col 44}{space 1}   -0.26{col 53}{space 3}0.792{col 61}{space 4}-.0025881{col 74}{space 3}  .001973
+{txt}{space 17}2  {c |}{col 21}{res}{space 2}-.0009343{col 33}{space 2} .0010194{col 44}{space 1}   -0.92{col 53}{space 3}0.359{col 61}{space 4}-.0029324{col 74}{space 3} .0010638
+{txt}{space 17}3  {c |}{col 21}{res}{space 2} .0006078{col 33}{space 2} .0008379{col 44}{space 1}    0.73{col 53}{space 3}0.468{col 61}{space 4}-.0010346{col 74}{space 3} .0022503
+{txt}{space 19} {c |}
+{space 6}householdsize {c |}{col 21}{res}{space 2}-6.31e-07{col 33}{space 2} .0000961{col 44}{space 1}   -0.01{col 53}{space 3}0.995{col 61}{space 4} -.000189{col 74}{space 3} .0001877
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2} 2.59e-06{col 33}{space 2} 1.64e-07{col 44}{space 1}   15.80{col 53}{space 3}0.000{col 61}{space 4} 2.27e-06{col 74}{space 3} 2.91e-06
+{txt}{space 19} {c |}
+{space 8}educationbr {c |}
+{space 17}1  {c |}{col 21}{res}{space 2}  .000491{col 33}{space 2} .0003219{col 44}{space 1}    1.53{col 53}{space 3}0.127{col 61}{space 4}-.0001402{col 74}{space 3} .0011223
+{txt}{space 17}2  {c |}{col 21}{res}{space 2}  .000762{col 33}{space 2} .0003188{col 44}{space 1}    2.39{col 53}{space 3}0.017{col 61}{space 4} .0001365{col 74}{space 3} .0013876
+{txt}{space 19} {c |}
+{space 11}townsend {c |}{col 21}{res}{space 2}-.0000929{col 33}{space 2}  .000039{col 44}{space 1}   -2.38{col 53}{space 3}0.017{col 61}{space 4}-.0001694{col 74}{space 3}-.0000164
+{txt}{space 19} {c |}
+{space 4}householdincome {c |}
+{space 17}2  {c |}{col 21}{res}{space 2}-.0005656{col 33}{space 2} .0004212{col 44}{space 1}   -1.34{col 53}{space 3}0.183{col 61}{space 4}-.0014019{col 74}{space 3} .0002707
+{txt}{space 17}3  {c |}{col 21}{res}{space 2}-.0010045{col 33}{space 2} .0003967{col 44}{space 1}   -2.53{col 53}{space 3}0.012{col 61}{space 4}-.0017866{col 74}{space 3}-.0002225
+{txt}{space 17}4  {c |}{col 21}{res}{space 2}-.0011508{col 33}{space 2}  .000405{col 44}{space 1}   -2.84{col 53}{space 3}0.005{col 61}{space 4}-.0019459{col 74}{space 3}-.0003557
+{txt}{space 17}5  {c |}{col 21}{res}{space 2}-.0024702{col 33}{space 2} .0005699{col 44}{space 1}   -4.33{col 53}{space 3}0.000{col 61}{space 4}-.0035986{col 74}{space 3}-.0013417
+{txt}{space 19} {c |}
+{space 5}LE8_TOTALSCORE {c |}{col 21}{res}{space 2}-3.04e-06{col 33}{space 2} 1.15e-06{col 44}{space 1}   -2.63{col 53}{space 3}0.008{col 61}{space 4}-5.31e-06{col 74}{space 3}-7.79e-07
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2}-1.36e-06{col 33}{space 2} 1.29e-06{col 44}{space 1}   -1.06{col 53}{space 3}0.290{col 61}{space 4}-3.88e-06{col 74}{space 3} 1.16e-06
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .0495005{col 33}{space 2}  .001389{col 44}{space 1}   35.64{col 53}{space 3}0.000{col 61}{space 4} .0467778{col 74}{space 3} .0522232
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    12,797
+{txt}{col 49}Average RVI{col 67}= {res}    0.0375
+{txt}{col 49}Largest FMI{col 67}= {res}    0.2207
+{txt}{col 49}Complete DF{col 67}= {res}     12779
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}     94.71
+{txt}{col 49}        avg{col 67}= {res}  7,986.45
+{txt}{col 49}        max{col 67}= {res} 12,776.04
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  17{txt},{res} 9762.7{txt}){col 67}= {res}     70.12
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}          ICVF_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2} .0002399{col 33}{space 2} .0002665{col 44}{space 1}    0.90{col 53}{space 3}0.368{col 61}{space 4}-.0002825{col 74}{space 3} .0007623
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2}-.0010361{col 33}{space 2} .0000348{col 44}{space 1}  -29.80{col 53}{space 3}0.000{col 61}{space 4}-.0011042{col 74}{space 3}-.0009679
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2}-.0003725{col 33}{space 2} .0004798{col 44}{space 1}   -0.78{col 53}{space 3}0.437{col 61}{space 4} -.001313{col 74}{space 3} .0005679
+{txt}{space 19} {c |}
+{space 10}RACE_ETHN {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} .0034338{col 33}{space 2} .0026234{col 44}{space 1}    1.31{col 53}{space 3}0.191{col 61}{space 4}-.0017084{col 74}{space 3}  .008576
+{txt}{space 17}2  {c |}{col 21}{res}{space 2}  .000376{col 33}{space 2} .0022987{col 44}{space 1}    0.16{col 53}{space 3}0.870{col 61}{space 4}-.0041297{col 74}{space 3} .0048818
+{txt}{space 17}3  {c |}{col 21}{res}{space 2} -.000134{col 33}{space 2} .0018899{col 44}{space 1}   -0.07{col 53}{space 3}0.943{col 61}{space 4}-.0038385{col 74}{space 3} .0035705
+{txt}{space 19} {c |}
+{space 6}householdsize {c |}{col 21}{res}{space 2} .0002781{col 33}{space 2} .0002157{col 44}{space 1}    1.29{col 53}{space 3}0.197{col 61}{space 4}-.0001448{col 74}{space 3}  .000701
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2}-4.27e-07{col 33}{space 2} 3.70e-07{col 44}{space 1}   -1.15{col 53}{space 3}0.248{col 61}{space 4}-1.15e-06{col 74}{space 3} 2.98e-07
+{txt}{space 19} {c |}
+{space 8}educationbr {c |}
+{space 17}1  {c |}{col 21}{res}{space 2}-.0007781{col 33}{space 2} .0007293{col 44}{space 1}   -1.07{col 53}{space 3}0.286{col 61}{space 4}-.0022083{col 74}{space 3} .0006521
+{txt}{space 17}2  {c |}{col 21}{res}{space 2}-.0009607{col 33}{space 2} .0007396{col 44}{space 1}   -1.30{col 53}{space 3}0.195{col 61}{space 4}-.0024154{col 74}{space 3}  .000494
+{txt}{space 19} {c |}
+{space 11}townsend {c |}{col 21}{res}{space 2}-.0001027{col 33}{space 2}  .000088{col 44}{space 1}   -1.17{col 53}{space 3}0.243{col 61}{space 4}-.0002752{col 74}{space 3} .0000698
+{txt}{space 19} {c |}
+{space 4}householdincome {c |}
+{space 17}2  {c |}{col 21}{res}{space 2} .0016025{col 33}{space 2} .0009496{col 44}{space 1}    1.69{col 53}{space 3}0.095{col 61}{space 4}-.0002828{col 74}{space 3} .0034878
+{txt}{space 17}3  {c |}{col 21}{res}{space 2} .0021772{col 33}{space 2}   .00091{col 44}{space 1}    2.39{col 53}{space 3}0.018{col 61}{space 4} .0003787{col 74}{space 3} .0039758
+{txt}{space 17}4  {c |}{col 21}{res}{space 2} .0031637{col 33}{space 2} .0009698{col 44}{space 1}    3.26{col 53}{space 3}0.001{col 61}{space 4} .0012443{col 74}{space 3} .0050831
+{txt}{space 17}5  {c |}{col 21}{res}{space 2} .0020405{col 33}{space 2} .0012197{col 44}{space 1}    1.67{col 53}{space 3}0.095{col 61}{space 4}-.0003565{col 74}{space 3} .0044376
+{txt}{space 19} {c |}
+{space 5}LE8_TOTALSCORE {c |}{col 21}{res}{space 2}-1.75e-07{col 33}{space 2} 2.60e-06{col 44}{space 1}   -0.07{col 53}{space 3}0.946{col 61}{space 4}-5.28e-06{col 74}{space 3} 4.93e-06
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2} 1.23e-06{col 33}{space 2} 2.90e-06{col 44}{space 1}    0.43{col 53}{space 3}0.670{col 61}{space 4}-4.44e-06{col 74}{space 3} 6.91e-06
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .6686241{col 33}{space 2} .0031624{col 44}{space 1}  211.43{col 53}{space 3}0.000{col 61}{space 4} .6624241{col 74}{space 3}  .674824
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    12,797
+{txt}{col 49}Average RVI{col 67}= {res}    0.0219
+{txt}{col 49}Largest FMI{col 67}= {res}    0.0966
+{txt}{col 49}Complete DF{col 67}= {res}     12779
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}    447.23
+{txt}{col 49}        avg{col 67}= {res}  8,790.67
+{txt}{col 49}        max{col 67}= {res} 12,776.40
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  17{txt},{res}11528.3{txt}){col 67}= {res}     69.04
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}            OD_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2} .0001552{col 33}{space 2} .0000818{col 44}{space 1}    1.90{col 53}{space 3}0.058{col 61}{space 4}-5.21e-06{col 74}{space 3} .0003156
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2}  .000222{col 33}{space 2} .0000106{col 44}{space 1}   20.85{col 53}{space 3}0.000{col 61}{space 4} .0002011{col 74}{space 3} .0002428
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2} .0005734{col 33}{space 2} .0001472{col 44}{space 1}    3.89{col 53}{space 3}0.000{col 61}{space 4} .0002849{col 74}{space 3}  .000862
+{txt}{space 19} {c |}
+{space 10}RACE_ETHN {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} .0026068{col 33}{space 2} .0008054{col 44}{space 1}    3.24{col 53}{space 3}0.001{col 61}{space 4} .0010281{col 74}{space 3} .0041855
+{txt}{space 17}2  {c |}{col 21}{res}{space 2} .0024446{col 33}{space 2} .0007057{col 44}{space 1}    3.46{col 53}{space 3}0.001{col 61}{space 4} .0010612{col 74}{space 3}  .003828
+{txt}{space 17}3  {c |}{col 21}{res}{space 2} .0007584{col 33}{space 2}   .00058{col 44}{space 1}    1.31{col 53}{space 3}0.191{col 61}{space 4}-.0003785{col 74}{space 3} .0018954
+{txt}{space 19} {c |}
+{space 6}householdsize {c |}{col 21}{res}{space 2}-.0001101{col 33}{space 2} .0000663{col 44}{space 1}   -1.66{col 53}{space 3}0.097{col 61}{space 4}  -.00024{col 74}{space 3} .0000198
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2} 2.21e-06{col 33}{space 2} 1.14e-07{col 44}{space 1}   19.42{col 53}{space 3}0.000{col 61}{space 4} 1.98e-06{col 74}{space 3} 2.43e-06
+{txt}{space 19} {c |}
+{space 8}educationbr {c |}
+{space 17}1  {c |}{col 21}{res}{space 2}-.0000695{col 33}{space 2} .0002228{col 44}{space 1}   -0.31{col 53}{space 3}0.755{col 61}{space 4}-.0005064{col 74}{space 3} .0003673
+{txt}{space 17}2  {c |}{col 21}{res}{space 2}  -.00041{col 33}{space 2} .0002191{col 44}{space 1}   -1.87{col 53}{space 3}0.061{col 61}{space 4}-.0008396{col 74}{space 3} .0000196
+{txt}{space 19} {c |}
+{space 11}townsend {c |}{col 21}{res}{space 2}-.0000176{col 33}{space 2}  .000027{col 44}{space 1}   -0.65{col 53}{space 3}0.514{col 61}{space 4}-.0000705{col 74}{space 3} .0000353
+{txt}{space 19} {c |}
+{space 4}householdincome {c |}
+{space 17}2  {c |}{col 21}{res}{space 2}-.0005402{col 33}{space 2} .0002669{col 44}{space 1}   -2.02{col 53}{space 3}0.043{col 61}{space 4}-.0010637{col 74}{space 3}-.0000167
+{txt}{space 17}3  {c |}{col 21}{res}{space 2}-.0006034{col 33}{space 2} .0002681{col 44}{space 1}   -2.25{col 53}{space 3}0.025{col 61}{space 4}-.0011302{col 74}{space 3}-.0000765
+{txt}{space 17}4  {c |}{col 21}{res}{space 2} -.000839{col 33}{space 2} .0002764{col 44}{space 1}   -3.04{col 53}{space 3}0.002{col 61}{space 4}-.0013811{col 74}{space 3}-.0002968
+{txt}{space 17}5  {c |}{col 21}{res}{space 2} -.001529{col 33}{space 2} .0003685{col 44}{space 1}   -4.15{col 53}{space 3}0.000{col 61}{space 4}-.0022522{col 74}{space 3}-.0008058
+{txt}{space 19} {c |}
+{space 5}LE8_TOTALSCORE {c |}{col 21}{res}{space 2}-8.48e-06{col 33}{space 2} 7.99e-07{col 44}{space 1}  -10.62{col 53}{space 3}0.000{col 61}{space 4}-.0000101{col 74}{space 3}-6.92e-06
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2}-3.45e-07{col 33}{space 2} 8.90e-07{col 44}{space 1}   -0.39{col 53}{space 3}0.698{col 61}{space 4}-2.09e-06{col 74}{space 3} 1.40e-06
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .1123718{col 33}{space 2} .0009631{col 44}{space 1}  116.68{col 53}{space 3}0.000{col 61}{space 4}  .110484{col 74}{space 3} .1142596
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. ************AD PGS SECOND TERTILE**********************
+. 
+. 
+. foreach y1 of varlist ISOVF_mean ICVF_mean OD_mean {c -(}
+{txt}  2{com}. mi estimate:reg `y1' c.infectionburdentert AGE SEX  i.RACE_ETHN householdsize TIME_V0V2 i.educationbr townsend i.householdincome  LE8_TOTALSCORE invmillsMRIINF if sample_final==1 & AD_PGStert==2
+{txt}  3{com}. {c )-}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    12,910
+{txt}{col 49}Average RVI{col 67}= {res}    0.0213
+{txt}{col 49}Largest FMI{col 67}= {res}    0.1227
+{txt}{col 49}Complete DF{col 67}= {res}     12892
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}    286.29
+{txt}{col 49}        avg{col 67}= {res}  9,072.21
+{txt}{col 49}        max{col 67}= {res} 12,889.26
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  17{txt},{res}11681.8{txt}){col 67}= {res}    184.88
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         ISOVF_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2} .0003254{col 33}{space 2} .0001189{col 44}{space 1}    2.74{col 53}{space 3}0.006{col 61}{space 4} .0000924{col 74}{space 3} .0005584
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2} .0006896{col 33}{space 2} .0000154{col 44}{space 1}   44.85{col 53}{space 3}0.000{col 61}{space 4} .0006594{col 74}{space 3} .0007197
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2} -.001754{col 33}{space 2} .0002135{col 44}{space 1}   -8.22{col 53}{space 3}0.000{col 61}{space 4}-.0021724{col 74}{space 3}-.0013355
+{txt}{space 19} {c |}
+{space 10}RACE_ETHN {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} .0023788{col 33}{space 2} .0014831{col 44}{space 1}    1.60{col 53}{space 3}0.109{col 61}{space 4}-.0005283{col 74}{space 3} .0052858
+{txt}{space 17}2  {c |}{col 21}{res}{space 2} .0002378{col 33}{space 2} .0010602{col 44}{space 1}    0.22{col 53}{space 3}0.822{col 61}{space 4}-.0018403{col 74}{space 3}  .002316
+{txt}{space 17}3  {c |}{col 21}{res}{space 2}-.0003029{col 33}{space 2} .0008183{col 44}{space 1}   -0.37{col 53}{space 3}0.711{col 61}{space 4} -.001907{col 74}{space 3} .0013012
+{txt}{space 19} {c |}
+{space 6}householdsize {c |}{col 21}{res}{space 2}-.0002843{col 33}{space 2}  .000094{col 44}{space 1}   -3.03{col 53}{space 3}0.002{col 61}{space 4}-.0004686{col 74}{space 3}-.0001001
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2} 2.24e-06{col 33}{space 2} 1.65e-07{col 44}{space 1}   13.60{col 53}{space 3}0.000{col 61}{space 4} 1.92e-06{col 74}{space 3} 2.56e-06
+{txt}{space 19} {c |}
+{space 8}educationbr {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} -.000106{col 33}{space 2} .0003275{col 44}{space 1}   -0.32{col 53}{space 3}0.746{col 61}{space 4}-.0007487{col 74}{space 3} .0005367
+{txt}{space 17}2  {c |}{col 21}{res}{space 2} .0002315{col 33}{space 2} .0003278{col 44}{space 1}    0.71{col 53}{space 3}0.481{col 61}{space 4}-.0004137{col 74}{space 3} .0008766
+{txt}{space 19} {c |}
+{space 11}townsend {c |}{col 21}{res}{space 2}-.0001285{col 33}{space 2} .0000398{col 44}{space 1}   -3.23{col 53}{space 3}0.001{col 61}{space 4}-.0002066{col 74}{space 3}-.0000504
+{txt}{space 19} {c |}
+{space 4}householdincome {c |}
+{space 17}2  {c |}{col 21}{res}{space 2}-.0008795{col 33}{space 2} .0003872{col 44}{space 1}   -2.27{col 53}{space 3}0.023{col 61}{space 4} -.001639{col 74}{space 3}-.0001201
+{txt}{space 17}3  {c |}{col 21}{res}{space 2}-.0007768{col 33}{space 2} .0003834{col 44}{space 1}   -2.03{col 53}{space 3}0.043{col 61}{space 4} -.001529{col 74}{space 3}-.0000246
+{txt}{space 17}4  {c |}{col 21}{res}{space 2}-.0012459{col 33}{space 2} .0004013{col 44}{space 1}   -3.10{col 53}{space 3}0.002{col 61}{space 4}-.0020326{col 74}{space 3}-.0004592
+{txt}{space 17}5  {c |}{col 21}{res}{space 2}-.0018562{col 33}{space 2}  .000531{col 44}{space 1}   -3.50{col 53}{space 3}0.000{col 61}{space 4}-.0028974{col 74}{space 3} -.000815
+{txt}{space 19} {c |}
+{space 5}LE8_TOTALSCORE {c |}{col 21}{res}{space 2}-5.11e-06{col 33}{space 2} 1.16e-06{col 44}{space 1}   -4.41{col 53}{space 3}0.000{col 61}{space 4}-7.38e-06{col 74}{space 3}-2.84e-06
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2}-1.29e-07{col 33}{space 2} 7.69e-07{col 44}{space 1}   -0.17{col 53}{space 3}0.867{col 61}{space 4}-1.64e-06{col 74}{space 3} 1.38e-06
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .0551893{col 33}{space 2} .0013966{col 44}{space 1}   39.52{col 53}{space 3}0.000{col 61}{space 4} .0524518{col 74}{space 3} .0579269
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    12,910
+{txt}{col 49}Average RVI{col 67}= {res}    0.0358
+{txt}{col 49}Largest FMI{col 67}= {res}    0.1903
+{txt}{col 49}Complete DF{col 67}= {res}     12892
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}    125.25
+{txt}{col 49}        avg{col 67}= {res}  8,252.51
+{txt}{col 49}        max{col 67}= {res} 12,889.27
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  17{txt},{res}10029.3{txt}){col 67}= {res}     80.09
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}          ICVF_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2} .0000316{col 33}{space 2}  .000267{col 44}{space 1}    0.12{col 53}{space 3}0.906{col 61}{space 4}-.0004917{col 74}{space 3} .0005548
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2}-.0011107{col 33}{space 2} .0000346{col 44}{space 1}  -32.11{col 53}{space 3}0.000{col 61}{space 4}-.0011785{col 74}{space 3}-.0010429
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2}-.0003444{col 33}{space 2} .0004796{col 44}{space 1}   -0.72{col 53}{space 3}0.473{col 61}{space 4}-.0012845{col 74}{space 3} .0005956
+{txt}{space 19} {c |}
+{space 10}RACE_ETHN {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} .0044864{col 33}{space 2} .0033302{col 44}{space 1}    1.35{col 53}{space 3}0.178{col 61}{space 4}-.0020413{col 74}{space 3} .0110142
+{txt}{space 17}2  {c |}{col 21}{res}{space 2} .0029537{col 33}{space 2} .0023811{col 44}{space 1}    1.24{col 53}{space 3}0.215{col 61}{space 4}-.0017137{col 74}{space 3} .0076211
+{txt}{space 17}3  {c |}{col 21}{res}{space 2} .0009026{col 33}{space 2} .0018375{col 44}{space 1}    0.49{col 53}{space 3}0.623{col 61}{space 4}-.0026992{col 74}{space 3} .0045044
+{txt}{space 19} {c |}
+{space 6}householdsize {c |}{col 21}{res}{space 2}-.0001444{col 33}{space 2} .0002121{col 44}{space 1}   -0.68{col 53}{space 3}0.496{col 61}{space 4}-.0005602{col 74}{space 3} .0002713
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2}-4.25e-07{col 33}{space 2} 3.70e-07{col 44}{space 1}   -1.15{col 53}{space 3}0.250{col 61}{space 4}-1.15e-06{col 74}{space 3} 3.00e-07
+{txt}{space 19} {c |}
+{space 8}educationbr {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} .0006336{col 33}{space 2} .0007325{col 44}{space 1}    0.87{col 53}{space 3}0.387{col 61}{space 4}-.0008036{col 74}{space 3} .0020708
+{txt}{space 17}2  {c |}{col 21}{res}{space 2}  .000342{col 33}{space 2} .0007375{col 44}{space 1}    0.46{col 53}{space 3}0.643{col 61}{space 4}-.0011099{col 74}{space 3}  .001794
+{txt}{space 19} {c |}
+{space 11}townsend {c |}{col 21}{res}{space 2} .0000122{col 33}{space 2} .0000897{col 44}{space 1}    0.14{col 53}{space 3}0.892{col 61}{space 4}-.0001636{col 74}{space 3} .0001881
+{txt}{space 19} {c |}
+{space 4}householdincome {c |}
+{space 17}2  {c |}{col 21}{res}{space 2} .0003992{col 33}{space 2} .0008664{col 44}{space 1}    0.46{col 53}{space 3}0.645{col 61}{space 4}-.0012997{col 74}{space 3} .0020981
+{txt}{space 17}3  {c |}{col 21}{res}{space 2} .0018028{col 33}{space 2} .0009025{col 44}{space 1}    2.00{col 53}{space 3}0.047{col 61}{space 4} .0000238{col 74}{space 3} .0035818
+{txt}{space 17}4  {c |}{col 21}{res}{space 2} .0028286{col 33}{space 2}  .000935{col 44}{space 1}    3.03{col 53}{space 3}0.003{col 61}{space 4} .0009904{col 74}{space 3} .0046669
+{txt}{space 17}5  {c |}{col 21}{res}{space 2} .0039107{col 33}{space 2} .0012919{col 44}{space 1}    3.03{col 53}{space 3}0.003{col 61}{space 4} .0013539{col 74}{space 3} .0064675
+{txt}{space 19} {c |}
+{space 5}LE8_TOTALSCORE {c |}{col 21}{res}{space 2}-4.01e-06{col 33}{space 2} 2.60e-06{col 44}{space 1}   -1.54{col 53}{space 3}0.123{col 61}{space 4}-9.11e-06{col 74}{space 3} 1.09e-06
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2} 6.89e-07{col 33}{space 2} 1.73e-06{col 44}{space 1}    0.40{col 53}{space 3}0.690{col 61}{space 4}-2.70e-06{col 74}{space 3} 4.08e-06
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .6761068{col 33}{space 2} .0031447{col 44}{space 1}  215.00{col 53}{space 3}0.000{col 61}{space 4} .6699426{col 74}{space 3} .6822709
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    12,910
+{txt}{col 49}Average RVI{col 67}= {res}    0.0438
+{txt}{col 49}Largest FMI{col 67}= {res}    0.2758
+{txt}{col 49}Complete DF{col 67}= {res}     12892
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}     62.11
+{txt}{col 49}        avg{col 67}= {res}  7,354.93
+{txt}{col 49}        max{col 67}= {res} 12,888.93
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  17{txt},{res} 9087.0{txt}){col 67}= {res}     58.03
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}            OD_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2} .0001812{col 33}{space 2} .0000853{col 44}{space 1}    2.12{col 53}{space 3}0.034{col 61}{space 4}  .000014{col 74}{space 3} .0003484
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2} .0002084{col 33}{space 2} .0000111{col 44}{space 1}   18.82{col 53}{space 3}0.000{col 61}{space 4} .0001867{col 74}{space 3} .0002302
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2} .0003627{col 33}{space 2} .0001534{col 44}{space 1}    2.36{col 53}{space 3}0.018{col 61}{space 4}  .000062{col 74}{space 3} .0006634
+{txt}{space 19} {c |}
+{space 10}RACE_ETHN {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} .0038509{col 33}{space 2} .0010646{col 44}{space 1}    3.62{col 53}{space 3}0.000{col 61}{space 4} .0017641{col 74}{space 3} .0059377
+{txt}{space 17}2  {c |}{col 21}{res}{space 2}  .000839{col 33}{space 2}  .000761{col 44}{space 1}    1.10{col 53}{space 3}0.270{col 61}{space 4}-.0006526{col 74}{space 3} .0023305
+{txt}{space 17}3  {c |}{col 21}{res}{space 2} .0006903{col 33}{space 2} .0005873{col 44}{space 1}    1.18{col 53}{space 3}0.240{col 61}{space 4}-.0004609{col 74}{space 3} .0018415
+{txt}{space 19} {c |}
+{space 6}householdsize {c |}{col 21}{res}{space 2}-.0001532{col 33}{space 2} .0000679{col 44}{space 1}   -2.26{col 53}{space 3}0.024{col 61}{space 4}-.0002863{col 74}{space 3}  -.00002
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2} 2.18e-06{col 33}{space 2} 1.18e-07{col 44}{space 1}   18.42{col 53}{space 3}0.000{col 61}{space 4} 1.95e-06{col 74}{space 3} 2.41e-06
+{txt}{space 19} {c |}
+{space 8}educationbr {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} .0000403{col 33}{space 2} .0002501{col 44}{space 1}    0.16{col 53}{space 3}0.872{col 61}{space 4}-.0004545{col 74}{space 3}  .000535
+{txt}{space 17}2  {c |}{col 21}{res}{space 2}-.0005699{col 33}{space 2} .0002346{col 44}{space 1}   -2.43{col 53}{space 3}0.016{col 61}{space 4}-.0010314{col 74}{space 3}-.0001084
+{txt}{space 19} {c |}
+{space 11}townsend {c |}{col 21}{res}{space 2}-6.25e-06{col 33}{space 2} .0000287{col 44}{space 1}   -0.22{col 53}{space 3}0.828{col 61}{space 4}-.0000626{col 74}{space 3} .0000501
+{txt}{space 19} {c |}
+{space 4}householdincome {c |}
+{space 17}2  {c |}{col 21}{res}{space 2}-.0002229{col 33}{space 2} .0003055{col 44}{space 1}   -0.73{col 53}{space 3}0.468{col 61}{space 4}-.0008298{col 74}{space 3} .0003841
+{txt}{space 17}3  {c |}{col 21}{res}{space 2} -.000344{col 33}{space 2} .0003103{col 44}{space 1}   -1.11{col 53}{space 3}0.272{col 61}{space 4}-.0009642{col 74}{space 3} .0002763
+{txt}{space 17}4  {c |}{col 21}{res}{space 2} -.000495{col 33}{space 2} .0003266{col 44}{space 1}   -1.52{col 53}{space 3}0.134{col 61}{space 4}-.0011472{col 74}{space 3} .0001572
+{txt}{space 17}5  {c |}{col 21}{res}{space 2}-.0009256{col 33}{space 2} .0004076{col 44}{space 1}   -2.27{col 53}{space 3}0.024{col 61}{space 4}-.0017305{col 74}{space 3}-.0001207
+{txt}{space 19} {c |}
+{space 5}LE8_TOTALSCORE {c |}{col 21}{res}{space 2}-7.41e-06{col 33}{space 2} 8.32e-07{col 44}{space 1}   -8.91{col 53}{space 3}0.000{col 61}{space 4}-9.04e-06{col 74}{space 3}-5.78e-06
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2}-1.07e-06{col 33}{space 2} 5.52e-07{col 44}{space 1}   -1.94{col 53}{space 3}0.052{col 61}{space 4}-2.15e-06{col 74}{space 3} 1.11e-08
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .1130192{col 33}{space 2} .0010158{col 44}{space 1}  111.26{col 53}{space 3}0.000{col 61}{space 4} .1110276{col 74}{space 3} .1150107
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. ************AD PGS THIRD TERTILE**********************
+. 
+. 
+. 
+. foreach y1 of varlist ISOVF_mean ICVF_mean OD_mean {c -(}
+{txt}  2{com}. mi estimate:reg `y1' c.infectionburdentert AGE SEX  i.RACE_ETHN householdsize TIME_V0V2 i.educationbr townsend i.householdincome  LE8_TOTALSCORE invmillsMRIINF if sample_final==1 & AD_PGStert==3
+{txt}  3{com}. {c )-}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    13,096
+{txt}{col 49}Average RVI{col 67}= {res}    0.0396
+{txt}{col 49}Largest FMI{col 67}= {res}    0.1122
+{txt}{col 49}Complete DF{col 67}= {res}     13078
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}    338.51
+{txt}{col 49}        avg{col 67}= {res}  8,233.33
+{txt}{col 49}        max{col 67}= {res} 13,075.46
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  17{txt},{res} 9688.2{txt}){col 67}= {res}    185.01
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         ISOVF_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2} .0002157{col 33}{space 2} .0001176{col 44}{space 1}    1.83{col 53}{space 3}0.067{col 61}{space 4}-.0000147{col 74}{space 3} .0004461
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2} .0007293{col 33}{space 2} .0000155{col 44}{space 1}   46.95{col 53}{space 3}0.000{col 61}{space 4} .0006988{col 74}{space 3} .0007597
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2}-.0011342{col 33}{space 2} .0002122{col 44}{space 1}   -5.34{col 53}{space 3}0.000{col 61}{space 4}-.0015501{col 74}{space 3}-.0007182
+{txt}{space 19} {c |}
+{space 10}RACE_ETHN {c |}
+{space 17}1  {c |}{col 21}{res}{space 2}-.0018808{col 33}{space 2} .0013903{col 44}{space 1}   -1.35{col 53}{space 3}0.176{col 61}{space 4} -.004606{col 74}{space 3} .0008444
+{txt}{space 17}2  {c |}{col 21}{res}{space 2} .0004668{col 33}{space 2}  .001054{col 44}{space 1}    0.44{col 53}{space 3}0.658{col 61}{space 4}-.0015991{col 74}{space 3} .0025327
+{txt}{space 17}3  {c |}{col 21}{res}{space 2}-.0003727{col 33}{space 2} .0008834{col 44}{space 1}   -0.42{col 53}{space 3}0.673{col 61}{space 4}-.0021044{col 74}{space 3} .0013589
+{txt}{space 19} {c |}
+{space 6}householdsize {c |}{col 21}{res}{space 2}-.0001876{col 33}{space 2} .0000974{col 44}{space 1}   -1.92{col 53}{space 3}0.054{col 61}{space 4}-.0003786{col 74}{space 3} 3.45e-06
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2} 2.45e-06{col 33}{space 2} 1.63e-07{col 44}{space 1}   15.08{col 53}{space 3}0.000{col 61}{space 4} 2.13e-06{col 74}{space 3} 2.77e-06
+{txt}{space 19} {c |}
+{space 8}educationbr {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} .0005185{col 33}{space 2} .0003282{col 44}{space 1}    1.58{col 53}{space 3}0.115{col 61}{space 4}-.0001262{col 74}{space 3} .0011632
+{txt}{space 17}2  {c |}{col 21}{res}{space 2} .0006355{col 33}{space 2} .0003183{col 44}{space 1}    2.00{col 53}{space 3}0.046{col 61}{space 4} .0000106{col 74}{space 3} .0012604
+{txt}{space 19} {c |}
+{space 11}townsend {c |}{col 21}{res}{space 2}-.0000762{col 33}{space 2} .0000396{col 44}{space 1}   -1.93{col 53}{space 3}0.054{col 61}{space 4}-.0001537{col 74}{space 3} 1.38e-06
+{txt}{space 19} {c |}
+{space 4}householdincome {c |}
+{space 17}2  {c |}{col 21}{res}{space 2} 7.92e-08{col 33}{space 2} .0003916{col 44}{space 1}    0.00{col 53}{space 3}1.000{col 61}{space 4} -.000769{col 74}{space 3} .0007692
+{txt}{space 17}3  {c |}{col 21}{res}{space 2}-.0001686{col 33}{space 2} .0003806{col 44}{space 1}   -0.44{col 53}{space 3}0.658{col 61}{space 4}-.0009163{col 74}{space 3} .0005791
+{txt}{space 17}4  {c |}{col 21}{res}{space 2}-.0004363{col 33}{space 2} .0004103{col 44}{space 1}   -1.06{col 53}{space 3}0.288{col 61}{space 4}-.0012433{col 74}{space 3} .0003708
+{txt}{space 17}5  {c |}{col 21}{res}{space 2}-.0005947{col 33}{space 2} .0005316{col 44}{space 1}   -1.12{col 53}{space 3}0.264{col 61}{space 4}-.0016389{col 74}{space 3} .0004495
+{txt}{space 19} {c |}
+{space 5}LE8_TOTALSCORE {c |}{col 21}{res}{space 2}-5.16e-06{col 33}{space 2} 1.15e-06{col 44}{space 1}   -4.50{col 53}{space 3}0.000{col 61}{space 4}-7.40e-06{col 74}{space 3}-2.91e-06
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2}-4.12e-07{col 33}{space 2} 8.61e-07{col 44}{space 1}   -0.48{col 53}{space 3}0.632{col 61}{space 4}-2.10e-06{col 74}{space 3} 1.28e-06
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .0504815{col 33}{space 2} .0013908{col 44}{space 1}   36.30{col 53}{space 3}0.000{col 61}{space 4} .0477553{col 74}{space 3} .0532077
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    13,096
+{txt}{col 49}Average RVI{col 67}= {res}    0.0423
+{txt}{col 49}Largest FMI{col 67}= {res}    0.2782
+{txt}{col 49}Complete DF{col 67}= {res}     13078
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}     61.09
+{txt}{col 49}        avg{col 67}= {res}  7,749.50
+{txt}{col 49}        max{col 67}= {res} 13,072.38
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  17{txt},{res} 9354.1{txt}){col 67}= {res}     73.29
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}          ICVF_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2}  -.00048{col 33}{space 2}  .000266{col 44}{space 1}   -1.80{col 53}{space 3}0.071{col 61}{space 4}-.0010015{col 74}{space 3} .0000414
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2}-.0011047{col 33}{space 2} .0000351{col 44}{space 1}  -31.44{col 53}{space 3}0.000{col 61}{space 4}-.0011736{col 74}{space 3}-.0010358
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2} .0004488{col 33}{space 2} .0004803{col 44}{space 1}    0.93{col 53}{space 3}0.350{col 61}{space 4}-.0004927{col 74}{space 3} .0013903
+{txt}{space 19} {c |}
+{space 10}RACE_ETHN {c |}
+{space 17}1  {c |}{col 21}{res}{space 2}-.0008872{col 33}{space 2} .0031459{col 44}{space 1}   -0.28{col 53}{space 3}0.778{col 61}{space 4}-.0070536{col 74}{space 3} .0052792
+{txt}{space 17}2  {c |}{col 21}{res}{space 2} .0027294{col 33}{space 2} .0023847{col 44}{space 1}    1.14{col 53}{space 3}0.252{col 61}{space 4}-.0019449{col 74}{space 3} .0074037
+{txt}{space 17}3  {c |}{col 21}{res}{space 2}  .003578{col 33}{space 2}  .001999{col 44}{space 1}    1.79{col 53}{space 3}0.073{col 61}{space 4}-.0003403{col 74}{space 3} .0074962
+{txt}{space 19} {c |}
+{space 6}householdsize {c |}{col 21}{res}{space 2} .0000844{col 33}{space 2} .0002208{col 44}{space 1}    0.38{col 53}{space 3}0.702{col 61}{space 4}-.0003483{col 74}{space 3} .0005171
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2} 5.18e-07{col 33}{space 2} 3.68e-07{col 44}{space 1}    1.41{col 53}{space 3}0.159{col 61}{space 4}-2.03e-07{col 74}{space 3} 1.24e-06
+{txt}{space 19} {c |}
+{space 8}educationbr {c |}
+{space 17}1  {c |}{col 21}{res}{space 2}-.0003965{col 33}{space 2} .0007327{col 44}{space 1}   -0.54{col 53}{space 3}0.589{col 61}{space 4} -.001834{col 74}{space 3} .0010411
+{txt}{space 17}2  {c |}{col 21}{res}{space 2}-.0006518{col 33}{space 2}  .000746{col 44}{space 1}   -0.87{col 53}{space 3}0.383{col 61}{space 4}-.0021221{col 74}{space 3} .0008185
+{txt}{space 19} {c |}
+{space 11}townsend {c |}{col 21}{res}{space 2}-.0000643{col 33}{space 2} .0000897{col 44}{space 1}   -0.72{col 53}{space 3}0.474{col 61}{space 4}-.0002402{col 74}{space 3} .0001116
+{txt}{space 19} {c |}
+{space 4}householdincome {c |}
+{space 17}2  {c |}{col 21}{res}{space 2} .0015542{col 33}{space 2} .0009675{col 44}{space 1}    1.61{col 53}{space 3}0.112{col 61}{space 4}-.0003732{col 74}{space 3} .0034816
+{txt}{space 17}3  {c |}{col 21}{res}{space 2} .0019293{col 33}{space 2} .0009547{col 44}{space 1}    2.02{col 53}{space 3}0.048{col 61}{space 4} .0000203{col 74}{space 3} .0038383
+{txt}{space 17}4  {c |}{col 21}{res}{space 2} .0016214{col 33}{space 2} .0010009{col 44}{space 1}    1.62{col 53}{space 3}0.110{col 61}{space 4}-.0003731{col 74}{space 3} .0036158
+{txt}{space 17}5  {c |}{col 21}{res}{space 2} .0008352{col 33}{space 2} .0012162{col 44}{space 1}    0.69{col 53}{space 3}0.493{col 61}{space 4}-.0015565{col 74}{space 3} .0032269
+{txt}{space 19} {c |}
+{space 5}LE8_TOTALSCORE {c |}{col 21}{res}{space 2} 4.94e-07{col 33}{space 2} 2.59e-06{col 44}{space 1}    0.19{col 53}{space 3}0.849{col 61}{space 4}-4.59e-06{col 74}{space 3} 5.57e-06
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2}-4.42e-07{col 33}{space 2} 1.95e-06{col 44}{space 1}   -0.23{col 53}{space 3}0.820{col 61}{space 4}-4.26e-06{col 74}{space 3} 3.38e-06
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2}  .669444{col 33}{space 2}   .00317{col 44}{space 1}  211.18{col 53}{space 3}0.000{col 61}{space 4}  .663229{col 74}{space 3}  .675659
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    13,096
+{txt}{col 49}Average RVI{col 67}= {res}    0.0380
+{txt}{col 49}Largest FMI{col 67}= {res}    0.1812
+{txt}{col 49}Complete DF{col 67}= {res}     13078
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}    137.50
+{txt}{col 49}        avg{col 67}= {res}  8,841.89
+{txt}{col 49}        max{col 67}= {res} 13,075.89
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  17{txt},{res} 9872.3{txt}){col 67}= {res}     80.79
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}            OD_mean{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 61}     [95% con{col 74}f. interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+infectionburdentert {c |}{col 21}{res}{space 2} .0002683{col 33}{space 2} .0000772{col 44}{space 1}    3.47{col 53}{space 3}0.001{col 61}{space 4} .0001169{col 74}{space 3} .0004196
+{txt}{space 16}AGE {c |}{col 21}{res}{space 2} .0002457{col 33}{space 2} .0000102{col 44}{space 1}   24.05{col 53}{space 3}0.000{col 61}{space 4} .0002257{col 74}{space 3} .0002657
+{txt}{space 16}SEX {c |}{col 21}{res}{space 2} .0006366{col 33}{space 2} .0001396{col 44}{space 1}    4.56{col 53}{space 3}0.000{col 61}{space 4}  .000363{col 74}{space 3} .0009103
+{txt}{space 19} {c |}
+{space 10}RACE_ETHN {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} .0018243{col 33}{space 2} .0009133{col 44}{space 1}    2.00{col 53}{space 3}0.046{col 61}{space 4} .0000342{col 74}{space 3} .0036145
+{txt}{space 17}2  {c |}{col 21}{res}{space 2} .0011608{col 33}{space 2} .0006924{col 44}{space 1}    1.68{col 53}{space 3}0.094{col 61}{space 4}-.0001963{col 74}{space 3}  .002518
+{txt}{space 17}3  {c |}{col 21}{res}{space 2}-.0000746{col 33}{space 2} .0005802{col 44}{space 1}   -0.13{col 53}{space 3}0.898{col 61}{space 4}-.0012119{col 74}{space 3} .0010628
+{txt}{space 19} {c |}
+{space 6}householdsize {c |}{col 21}{res}{space 2}-.0001008{col 33}{space 2}  .000064{col 44}{space 1}   -1.57{col 53}{space 3}0.115{col 61}{space 4}-.0002263{col 74}{space 3} .0000247
+{txt}{space 10}TIME_V0V2 {c |}{col 21}{res}{space 2} 2.32e-06{col 33}{space 2} 1.07e-07{col 44}{space 1}   21.68{col 53}{space 3}0.000{col 61}{space 4} 2.11e-06{col 74}{space 3} 2.53e-06
+{txt}{space 19} {c |}
+{space 8}educationbr {c |}
+{space 17}1  {c |}{col 21}{res}{space 2} .0000738{col 33}{space 2} .0002265{col 44}{space 1}    0.33{col 53}{space 3}0.745{col 61}{space 4}-.0003742{col 74}{space 3} .0005217
+{txt}{space 17}2  {c |}{col 21}{res}{space 2}-.0004565{col 33}{space 2} .0002087{col 44}{space 1}   -2.19{col 53}{space 3}0.029{col 61}{space 4}-.0008662{col 74}{space 3}-.0000469
+{txt}{space 19} {c |}
+{space 11}townsend {c |}{col 21}{res}{space 2} 8.87e-06{col 33}{space 2}  .000026{col 44}{space 1}    0.34{col 53}{space 3}0.733{col 61}{space 4}-.0000421{col 74}{space 3} .0000599
+{txt}{space 19} {c |}
+{space 4}householdincome {c |}
+{space 17}2  {c |}{col 21}{res}{space 2}-.0003546{col 33}{space 2} .0002517{col 44}{space 1}   -1.41{col 53}{space 3}0.159{col 61}{space 4}-.0008481{col 74}{space 3}  .000139
+{txt}{space 17}3  {c |}{col 21}{res}{space 2}-.0006751{col 33}{space 2} .0002406{col 44}{space 1}   -2.81{col 53}{space 3}0.005{col 61}{space 4}-.0011467{col 74}{space 3}-.0002034
+{txt}{space 17}4  {c |}{col 21}{res}{space 2}-.0007161{col 33}{space 2} .0002792{col 44}{space 1}   -2.56{col 53}{space 3}0.011{col 61}{space 4} -.001268{col 74}{space 3}-.0001641
+{txt}{space 17}5  {c |}{col 21}{res}{space 2}-.0009821{col 33}{space 2} .0003426{col 44}{space 1}   -2.87{col 53}{space 3}0.004{col 61}{space 4} -.001654{col 74}{space 3}-.0003102
+{txt}{space 19} {c |}
+{space 5}LE8_TOTALSCORE {c |}{col 21}{res}{space 2}-7.00e-06{col 33}{space 2} 7.52e-07{col 44}{space 1}   -9.31{col 53}{space 3}0.000{col 61}{space 4}-8.48e-06{col 74}{space 3}-5.53e-06
+{txt}{space 5}invmillsMRIINF {c |}{col 21}{res}{space 2} 6.46e-07{col 33}{space 2} 5.66e-07{col 44}{space 1}    1.14{col 53}{space 3}0.253{col 61}{space 4}-4.63e-07{col 74}{space 3} 1.76e-06
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} .1095806{col 33}{space 2} .0009104{col 44}{space 1}  120.37{col 53}{space 3}0.000{col 61}{space 4} .1077962{col 74}{space 3} .1113651
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. //////////////////////DIFFERENCE BY AD PGS TERTILE//////////////////////////////////
+> 
+. 
+. 
+. foreach y1 of varlist ISOVF_mean ICVF_mean OD_mean {c -(}
+{txt}  2{com}. mi estimate:reg `y1' c.infectionburdentert##AD_PGStert AGE SEX  i.RACE_ETHN householdsize TIME_V0V2 i.educationbr townsend i.householdincome  LE8_TOTALSCORE invmillsMRIINF if sample_final==1 
+{txt}  3{com}. {c )-}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    38,803
+{txt}{col 49}Average RVI{col 67}= {res}    0.0281
+{txt}{col 49}Largest FMI{col 67}= {res}    0.1833
+{txt}{col 49}Complete DF{col 67}= {res}     38781
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}    135.67
+{txt}{col 49}        avg{col 67}= {res} 27,674.50
+{txt}{col 49}        max{col 67}= {res} 38,776.44
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  21{txt},{res}27423.8{txt}){col 67}= {res}    455.33
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 33}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                      ISOVF_mean{col 34}{c |} Coefficient{col 46}  Std. err.{col 58}      t{col 66}   P>|t|{col 74}     [95% con{col 87}f. interval]
+{hline 33}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 13}infectionburdentert {c |}{col 34}{res}{space 2} .0003551{col 46}{space 2} .0001184{col 57}{space 1}    3.00{col 66}{space 3}0.003{col 74}{space 4} .0001229{col 87}{space 3} .0005872
+{txt}{space 32} {c |}
+{space 22}AD_PGStert {c |}
+{space 30}2  {c |}{col 34}{res}{space 2}-.0002128{col 46}{space 2} .0003306{col 57}{space 1}   -0.64{col 66}{space 3}0.520{col 74}{space 4}-.0008608{col 87}{space 3} .0004352
+{txt}{space 30}3  {c |}{col 34}{res}{space 2} .0001352{col 46}{space 2} .0003287{col 57}{space 1}    0.41{col 66}{space 3}0.681{col 74}{space 4} -.000509{col 87}{space 3} .0007795
+{txt}{space 32} {c |}
+AD_PGStert#c.infectionburdentert {c |}
+{space 30}2  {c |}{col 34}{res}{space 2} -.000039{col 46}{space 2} .0001673{col 57}{space 1}   -0.23{col 66}{space 3}0.816{col 74}{space 4} -.000367{col 87}{space 3} .0002889
+{txt}{space 30}3  {c |}{col 34}{res}{space 2}-.0001346{col 46}{space 2} .0001664{col 57}{space 1}   -0.81{col 66}{space 3}0.419{col 74}{space 4}-.0004607{col 87}{space 3} .0001915
+{txt}{space 32} {c |}
+{space 29}AGE {c |}{col 34}{res}{space 2} .0007158{col 46}{space 2} 8.91e-06{col 57}{space 1}   80.34{col 66}{space 3}0.000{col 74}{space 4} .0006983{col 87}{space 3} .0007332
+{txt}{space 29}SEX {c |}{col 34}{res}{space 2}-.0014519{col 46}{space 2} .0001229{col 57}{space 1}  -11.81{col 66}{space 3}0.000{col 74}{space 4}-.0016927{col 87}{space 3} -.001211
+{txt}{space 32} {c |}
+{space 23}RACE_ETHN {c |}
+{space 30}1  {c |}{col 34}{res}{space 2}-.0000857{col 46}{space 2} .0007647{col 57}{space 1}   -0.11{col 66}{space 3}0.911{col 74}{space 4}-.0015847{col 87}{space 3} .0014132
+{txt}{space 30}2  {c |}{col 34}{res}{space 2}   -.0001{col 46}{space 2} .0006027{col 57}{space 1}   -0.17{col 66}{space 3}0.868{col 74}{space 4}-.0012813{col 87}{space 3} .0010812
+{txt}{space 30}3  {c |}{col 34}{res}{space 2}-2.16e-06{col 46}{space 2} .0004879{col 57}{space 1}   -0.00{col 66}{space 3}0.996{col 74}{space 4}-.0009584{col 87}{space 3}  .000954
+{txt}{space 32} {c |}
+{space 19}householdsize {c |}{col 34}{res}{space 2}-.0001581{col 46}{space 2} .0000551{col 57}{space 1}   -2.87{col 66}{space 3}0.004{col 74}{space 4} -.000266{col 87}{space 3}-.0000501
+{txt}{space 23}TIME_V0V2 {c |}{col 34}{res}{space 2} 2.43e-06{col 46}{space 2} 9.46e-08{col 57}{space 1}   25.65{col 66}{space 3}0.000{col 74}{space 4} 2.24e-06{col 87}{space 3} 2.61e-06
+{txt}{space 32} {c |}
+{space 21}educationbr {c |}
+{space 30}1  {c |}{col 34}{res}{space 2} .0003055{col 46}{space 2} .0001885{col 57}{space 1}    1.62{col 66}{space 3}0.105{col 74}{space 4}-.0000644{col 87}{space 3} .0006754
+{txt}{space 30}2  {c |}{col 34}{res}{space 2} .0005482{col 46}{space 2} .0001803{col 57}{space 1}    3.04{col 66}{space 3}0.002{col 74}{space 4} .0001947{col 87}{space 3} .0009017
+{txt}{space 32} {c |}
+{space 24}townsend {c |}{col 34}{res}{space 2}-.0000995{col 46}{space 2} .0000228{col 57}{space 1}   -4.37{col 66}{space 3}0.000{col 74}{space 4}-.0001442{col 87}{space 3}-.0000549
+{txt}{space 32} {c |}
+{space 17}householdincome {c |}
+{space 30}2  {c |}{col 34}{res}{space 2}-.0004806{col 46}{space 2}  .000231{col 57}{space 1}   -2.08{col 66}{space 3}0.038{col 74}{space 4}-.0009352{col 87}{space 3}-.0000259
+{txt}{space 30}3  {c |}{col 34}{res}{space 2} -.000649{col 46}{space 2} .0002339{col 57}{space 1}   -2.78{col 66}{space 3}0.006{col 74}{space 4}-.0011115{col 87}{space 3}-.0001865
+{txt}{space 30}4  {c |}{col 34}{res}{space 2}-.0009373{col 46}{space 2} .0002304{col 57}{space 1}   -4.07{col 66}{space 3}0.000{col 74}{space 4}-.0013892{col 87}{space 3}-.0004853
+{txt}{space 30}5  {c |}{col 34}{res}{space 2}-.0016258{col 46}{space 2} .0003114{col 57}{space 1}   -5.22{col 66}{space 3}0.000{col 74}{space 4}-.0022376{col 87}{space 3} -.001014
+{txt}{space 32} {c |}
+{space 18}LE8_TOTALSCORE {c |}{col 34}{res}{space 2}-4.41e-06{col 46}{space 2} 6.65e-07{col 57}{space 1}   -6.62{col 66}{space 3}0.000{col 74}{space 4}-5.71e-06{col 87}{space 3}-3.10e-06
+{txt}{space 18}invmillsMRIINF {c |}{col 34}{res}{space 2}-4.47e-07{col 46}{space 2} 5.23e-07{col 57}{space 1}   -0.85{col 66}{space 3}0.393{col 74}{space 4}-1.47e-06{col 87}{space 3} 5.79e-07
+{txt}{space 27}_cons {c |}{col 34}{res}{space 2} .0517299{col 46}{space 2} .0008261{col 57}{space 1}   62.62{col 66}{space 3}0.000{col 74}{space 4} .0501108{col 87}{space 3} .0533491
+{txt}{hline 33}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    38,803
+{txt}{col 49}Average RVI{col 67}= {res}    0.0455
+{txt}{col 49}Largest FMI{col 67}= {res}    0.3677
+{txt}{col 49}Complete DF{col 67}= {res}     38781
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}     35.92
+{txt}{col 49}        avg{col 67}= {res} 23,665.47
+{txt}{col 49}        max{col 67}= {res} 38,776.72
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  21{txt},{res}18913.1{txt}){col 67}= {res}    178.31
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 33}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                       ICVF_mean{col 34}{c |} Coefficient{col 46}  Std. err.{col 58}      t{col 66}   P>|t|{col 74}     [95% con{col 87}f. interval]
+{hline 33}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 13}infectionburdentert {c |}{col 34}{res}{space 2} .0002424{col 46}{space 2}  .000267{col 57}{space 1}    0.91{col 66}{space 3}0.364{col 74}{space 4}-.0002809{col 87}{space 3} .0007658
+{txt}{space 32} {c |}
+{space 22}AD_PGStert {c |}
+{space 30}2  {c |}{col 34}{res}{space 2} .0009365{col 46}{space 2} .0007453{col 57}{space 1}    1.26{col 66}{space 3}0.209{col 74}{space 4}-.0005243{col 87}{space 3} .0023974
+{txt}{space 30}3  {c |}{col 34}{res}{space 2} .0008193{col 46}{space 2} .0007411{col 57}{space 1}    1.11{col 66}{space 3}0.269{col 74}{space 4}-.0006332{col 87}{space 3} .0022718
+{txt}{space 32} {c |}
+AD_PGStert#c.infectionburdentert {c |}
+{space 30}2  {c |}{col 34}{res}{space 2}-.0002339{col 46}{space 2} .0003772{col 57}{space 1}   -0.62{col 66}{space 3}0.535{col 74}{space 4}-.0009732{col 87}{space 3} .0005054
+{txt}{space 30}3  {c |}{col 34}{res}{space 2}-.0006825{col 46}{space 2} .0003751{col 57}{space 1}   -1.82{col 66}{space 3}0.069{col 74}{space 4}-.0014177{col 87}{space 3} .0000527
+{txt}{space 32} {c |}
+{space 29}AGE {c |}{col 34}{res}{space 2}-.0010844{col 46}{space 2} .0000201{col 57}{space 1}  -53.94{col 66}{space 3}0.000{col 74}{space 4}-.0011238{col 87}{space 3} -.001045
+{txt}{space 29}SEX {c |}{col 34}{res}{space 2}-.0000968{col 46}{space 2} .0002772{col 57}{space 1}   -0.35{col 66}{space 3}0.727{col 74}{space 4}-.0006402{col 87}{space 3} .0004466
+{txt}{space 32} {c |}
+{space 23}RACE_ETHN {c |}
+{space 30}1  {c |}{col 34}{res}{space 2} .0024185{col 46}{space 2} .0017241{col 57}{space 1}    1.40{col 66}{space 3}0.161{col 74}{space 4}-.0009608{col 87}{space 3} .0057978
+{txt}{space 30}2  {c |}{col 34}{res}{space 2}  .001971{col 46}{space 2} .0013588{col 57}{space 1}    1.45{col 66}{space 3}0.147{col 74}{space 4}-.0006923{col 87}{space 3} .0046342
+{txt}{space 30}3  {c |}{col 34}{res}{space 2} .0013487{col 46}{space 2} .0010997{col 57}{space 1}    1.23{col 66}{space 3}0.220{col 74}{space 4}-.0008068{col 87}{space 3} .0035041
+{txt}{space 32} {c |}
+{space 19}householdsize {c |}{col 34}{res}{space 2} .0000683{col 46}{space 2} .0001254{col 57}{space 1}    0.54{col 66}{space 3}0.586{col 74}{space 4}-.0001776{col 87}{space 3} .0003142
+{txt}{space 23}TIME_V0V2 {c |}{col 34}{res}{space 2}-1.14e-07{col 46}{space 2} 2.13e-07{col 57}{space 1}   -0.53{col 66}{space 3}0.593{col 74}{space 4}-5.32e-07{col 87}{space 3} 3.04e-07
+{txt}{space 32} {c |}
+{space 21}educationbr {c |}
+{space 30}1  {c |}{col 34}{res}{space 2}-.0001781{col 46}{space 2} .0004236{col 57}{space 1}   -0.42{col 66}{space 3}0.674{col 74}{space 4}-.0010091{col 87}{space 3} .0006529
+{txt}{space 30}2  {c |}{col 34}{res}{space 2}-.0004234{col 46}{space 2} .0004299{col 57}{space 1}   -0.98{col 66}{space 3}0.326{col 74}{space 4}-.0012704{col 87}{space 3} .0004235
+{txt}{space 32} {c |}
+{space 24}townsend {c |}{col 34}{res}{space 2}-.0000541{col 46}{space 2} .0000515{col 57}{space 1}   -1.05{col 66}{space 3}0.294{col 74}{space 4}-.0001551{col 87}{space 3} .0000469
+{txt}{space 32} {c |}
+{space 17}householdincome {c |}
+{space 30}2  {c |}{col 34}{res}{space 2} .0011784{col 46}{space 2} .0005761{col 57}{space 1}    2.05{col 66}{space 3}0.046{col 74}{space 4} .0000224{col 87}{space 3} .0023343
+{txt}{space 30}3  {c |}{col 34}{res}{space 2} .0019763{col 46}{space 2} .0005879{col 57}{space 1}    3.36{col 66}{space 3}0.002{col 74}{space 4}  .000784{col 87}{space 3} .0031687
+{txt}{space 30}4  {c |}{col 34}{res}{space 2} .0025344{col 46}{space 2} .0006005{col 57}{space 1}    4.22{col 66}{space 3}0.000{col 74}{space 4} .0013282{col 87}{space 3} .0037406
+{txt}{space 30}5  {c |}{col 34}{res}{space 2} .0022521{col 46}{space 2} .0007742{col 57}{space 1}    2.91{col 66}{space 3}0.005{col 74}{space 4} .0007054{col 87}{space 3} .0037988
+{txt}{space 32} {c |}
+{space 18}LE8_TOTALSCORE {c |}{col 34}{res}{space 2}-1.14e-06{col 46}{space 2} 1.50e-06{col 57}{space 1}   -0.76{col 66}{space 3}0.447{col 74}{space 4}-4.08e-06{col 87}{space 3} 1.80e-06
+{txt}{space 18}invmillsMRIINF {c |}{col 34}{res}{space 2} 3.44e-07{col 46}{space 2} 1.18e-06{col 57}{space 1}    0.29{col 66}{space 3}0.771{col 74}{space 4}-1.97e-06{col 87}{space 3} 2.66e-06
+{txt}{space 27}_cons {c |}{col 34}{res}{space 2} .6708013{col 46}{space 2} .0018843{col 57}{space 1}  355.99{col 66}{space 3}0.000{col 74}{space 4} .6671071{col 87}{space 3} .6744956
+{txt}{hline 33}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}Multiple-imputation estimates{col 49}Imputations{col 67}= {res}         5
+{txt}Linear regression{col 49}Number of obs{col 67}= {res}    38,803
+{txt}{col 49}Average RVI{col 67}= {res}    0.0276
+{txt}{col 49}Largest FMI{col 67}= {res}    0.2671
+{txt}{col 49}Complete DF{col 67}= {res}     38781
+{txt}DF adjustment:{ralign 15: {res:Small sample}}{col 49}DF:     min{col 67}= {res}     66.31
+{txt}{col 49}        avg{col 67}= {res} 23,527.67
+{txt}{col 49}        max{col 67}= {res} 38,776.91
+{txt}Model F test:{ralign 16: {res:Equal FMI}}{col 49}F({res}  21{txt},{res}27666.0{txt}){col 67}= {res}    166.98
+{txt}Within VCE type: {ralign 12:{res:OLS}}{col 49}Prob > F{col 67}= {res}    0.0000
+
+{txt}{hline 33}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                         OD_mean{col 34}{c |} Coefficient{col 46}  Std. err.{col 58}      t{col 66}   P>|t|{col 74}     [95% con{col 87}f. interval]
+{hline 33}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 13}infectionburdentert {c |}{col 34}{res}{space 2} .0001544{col 46}{space 2} .0000816{col 57}{space 1}    1.89{col 66}{space 3}0.059{col 74}{space 4}-5.62e-06{col 87}{space 3} .0003144
+{txt}{space 32} {c |}
+{space 22}AD_PGStert {c |}
+{space 30}2  {c |}{col 34}{res}{space 2} .0001677{col 46}{space 2} .0002279{col 57}{space 1}    0.74{col 66}{space 3}0.462{col 74}{space 4}-.0002789{col 87}{space 3} .0006143
+{txt}{space 30}3  {c |}{col 34}{res}{space 2}-.0001681{col 46}{space 2} .0002265{col 57}{space 1}   -0.74{col 66}{space 3}0.458{col 74}{space 4}-.0006121{col 87}{space 3}  .000276
+{txt}{space 32} {c |}
+AD_PGStert#c.infectionburdentert {c |}
+{space 30}2  {c |}{col 34}{res}{space 2}  .000021{col 46}{space 2} .0001153{col 57}{space 1}    0.18{col 66}{space 3}0.855{col 74}{space 4} -.000205{col 87}{space 3}  .000247
+{txt}{space 30}3  {c |}{col 34}{res}{space 2} .0001202{col 46}{space 2} .0001147{col 57}{space 1}    1.05{col 66}{space 3}0.294{col 74}{space 4}-.0001045{col 87}{space 3}  .000345
+{txt}{space 32} {c |}
+{space 29}AGE {c |}{col 34}{res}{space 2} .0002253{col 46}{space 2} 6.16e-06{col 57}{space 1}   36.59{col 66}{space 3}0.000{col 74}{space 4} .0002132{col 87}{space 3} .0002373
+{txt}{space 29}SEX {c |}{col 34}{res}{space 2} .0005262{col 46}{space 2} .0000848{col 57}{space 1}    6.21{col 66}{space 3}0.000{col 74}{space 4}   .00036{col 87}{space 3} .0006924
+{txt}{space 32} {c |}
+{space 23}RACE_ETHN {c |}
+{space 30}1  {c |}{col 34}{res}{space 2} .0026945{col 46}{space 2} .0005271{col 57}{space 1}    5.11{col 66}{space 3}0.000{col 74}{space 4} .0016613{col 87}{space 3} .0037276
+{txt}{space 30}2  {c |}{col 34}{res}{space 2} .0015109{col 46}{space 2} .0004153{col 57}{space 1}    3.64{col 66}{space 3}0.000{col 74}{space 4} .0006968{col 87}{space 3} .0023249
+{txt}{space 30}3  {c |}{col 34}{res}{space 2} .0004925{col 46}{space 2} .0003362{col 57}{space 1}    1.47{col 66}{space 3}0.143{col 74}{space 4}-.0001664{col 87}{space 3} .0011515
+{txt}{space 32} {c |}
+{space 19}householdsize {c |}{col 34}{res}{space 2}-.0001234{col 46}{space 2} .0000382{col 57}{space 1}   -3.23{col 66}{space 3}0.001{col 74}{space 4}-.0001984{col 87}{space 3}-.0000485
+{txt}{space 23}TIME_V0V2 {c |}{col 34}{res}{space 2} 2.23e-06{col 46}{space 2} 6.52e-08{col 57}{space 1}   34.23{col 66}{space 3}0.000{col 74}{space 4} 2.10e-06{col 87}{space 3} 2.36e-06
+{txt}{space 32} {c |}
+{space 21}educationbr {c |}
+{space 30}1  {c |}{col 34}{res}{space 2} .0000156{col 46}{space 2} .0001314{col 57}{space 1}    0.12{col 66}{space 3}0.905{col 74}{space 4}-.0002425{col 87}{space 3} .0002738
+{txt}{space 30}2  {c |}{col 34}{res}{space 2}-.0004741{col 46}{space 2} .0001258{col 57}{space 1}   -3.77{col 66}{space 3}0.000{col 74}{space 4}-.0007208{col 87}{space 3}-.0002273
+{txt}{space 32} {c |}
+{space 24}townsend {c |}{col 34}{res}{space 2}-5.15e-06{col 46}{space 2} .0000158{col 57}{space 1}   -0.33{col 66}{space 3}0.744{col 74}{space 4} -.000036{col 87}{space 3} .0000257
+{txt}{space 32} {c |}
+{space 17}householdincome {c |}
+{space 30}2  {c |}{col 34}{res}{space 2}-.0003829{col 46}{space 2} .0001637{col 57}{space 1}   -2.34{col 66}{space 3}0.021{col 74}{space 4}-.0007063{col 87}{space 3}-.0000594
+{txt}{space 30}3  {c |}{col 34}{res}{space 2}-.0005494{col 46}{space 2} .0001661{col 57}{space 1}   -3.31{col 66}{space 3}0.001{col 74}{space 4}-.0008797{col 87}{space 3}-.0002191
+{txt}{space 30}4  {c |}{col 34}{res}{space 2}-.0006892{col 46}{space 2}  .000179{col 57}{space 1}   -3.85{col 66}{space 3}0.000{col 74}{space 4}-.0010466{col 87}{space 3}-.0003319
+{txt}{space 30}5  {c |}{col 34}{res}{space 2}-.0011462{col 46}{space 2} .0002229{col 57}{space 1}   -5.14{col 66}{space 3}0.000{col 74}{space 4}-.0015864{col 87}{space 3} -.000706
+{txt}{space 32} {c |}
+{space 18}LE8_TOTALSCORE {c |}{col 34}{res}{space 2}-7.62e-06{col 46}{space 2} 4.58e-07{col 57}{space 1}  -16.62{col 66}{space 3}0.000{col 74}{space 4}-8.51e-06{col 87}{space 3}-6.72e-06
+{txt}{space 18}invmillsMRIINF {c |}{col 34}{res}{space 2}-3.11e-07{col 46}{space 2} 3.61e-07{col 57}{space 1}   -0.86{col 66}{space 3}0.388{col 74}{space 4}-1.02e-06{col 87}{space 3} 3.95e-07
+{txt}{space 27}_cons {c |}{col 34}{res}{space 2}  .111665{col 46}{space 2} .0005737{col 57}{space 1}  194.65{col 66}{space 3}0.000{col 74}{space 4} .1105404{col 87}{space 3} .1127896
+{txt}{hline 33}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. capture log close
+{smcl}
+{com}{sf}{ul off}

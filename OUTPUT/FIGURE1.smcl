@@ -1,0 +1,655 @@
+{smcl}
+{com}{sf}{ul off}{txt}
+{com}. 
+. //STEP 15: DETERMINE FINAL ANALYTIC SAMPLE SIZE/////
+. 
+. use UKB_PAPER4B_LE8INFECTMRI_NODDI, clear
+{txt}
+{com}. 
+. 
+. 
+. capture drop FA_mean
+{txt}
+{com}. egen FA_mean=rmean(FA_*)
+{txt}(461,872 missing values generated)
+
+{com}. 
+. 
+. 
+. capture drop MD_mean
+{txt}
+{com}. egen MD_mean=rmean(MD_*)
+{txt}(461,872 missing values generated)
+
+{com}. 
+. capture drop ISOVF_mean
+{txt}
+{com}. egen ISOVF_mean=rmean(ISOVF_*)
+{txt}(461,874 missing values generated)
+
+{com}. 
+. 
+. capture drop ICVF_mean
+{txt}
+{com}. egen ICVF_mean=rmean(ICVF_*)
+{txt}(461,874 missing values generated)
+
+{com}. 
+. 
+. capture drop OD_mean
+{txt}
+{com}. egen OD_mean=rmean(OD_*)
+{txt}(461,874 missing values generated)
+
+{com}. 
+. 
+. save, replace
+{txt}{p 0 4 2}
+file {bf}
+UKB_PAPER4B_LE8INFECTMRI_NODDI.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. 
+. 
+. **Sample 1**
+. 
+. capture drop sample1
+{txt}
+{com}. gen sample1=.
+{txt}(502,389 missing values generated)
+
+{com}. replace sample1=1 if baselineage~=. 
+{txt}(502,386 real changes made)
+
+{com}. replace sample1=0 if sample1~=1
+{txt}(3 real changes made)
+
+{com}. 
+. tab sample1
+
+    {txt}sample1 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}          3        0.00        0.00
+{txt}          1 {c |}{res}    502,386      100.00      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    502,389      100.00
+{txt}
+{com}. 
+. **Sample 2: Complete data on brain sMRI and dMRI**
+. 
+. capture drop sample2
+{txt}
+{com}. gen sample2=.
+{txt}(502,389 missing values generated)
+
+{com}. replace sample2=1 if ICV~=. & TOTALBRAIN~=. & WMH~=. & Hippocampus_Left~=. & FA_mean~=. & MD_mean~=. & ISOVF_mean~=. & ICVF_mean~=. & OD_mean~=.
+{txt}(39,989 real changes made)
+
+{com}. replace sample2=0 if sample2~=1
+{txt}(462,400 real changes made)
+
+{com}. 
+. tab sample2
+
+    {txt}sample2 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}    462,400       92.04       92.04
+{txt}          1 {c |}{res}     39,989        7.96      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    502,389      100.00
+{txt}
+{com}. 
+. **Sample 3A:  Complete data on infectionburden**
+. 
+. capture drop sample3A
+{txt}
+{com}. gen sample3A=.
+{txt}(502,389 missing values generated)
+
+{com}. replace sample3A=1 if infectionburden~=.
+{txt}(502,389 real changes made)
+
+{com}. replace sample3A=0 if sample3A~=1
+{txt}(0 real changes made)
+
+{com}. 
+. tab sample3A
+
+   {txt}sample3A {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          1 {c |}{res}    502,389      100.00      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    502,389      100.00
+{txt}
+{com}. 
+. **Sample 3B: Complete data on AD_PGS, LE8 TOTAL AND SUB-SCORES
+. capture drop sample3B
+{txt}
+{com}. gen sample3B=.
+{txt}(502,389 missing values generated)
+
+{com}. replace sample3B=1 if AD_PGS~=. & LE8_TOTALSCORE~=. & LE8_BIOLOGICAL~=. & LE8_LIFESTYLE~=.
+{txt}(485,710 real changes made)
+
+{com}. replace sample3B=0 if sample3B~=1
+{txt}(16,679 real changes made)
+
+{com}. 
+. tab sample3B
+
+   {txt}sample3B {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}     16,679        3.32        3.32
+{txt}          1 {c |}{res}    485,710       96.68      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    502,389      100.00
+{txt}
+{com}. 
+. **Sample 3: Complete data on infectionburden and AD PGS, LE8 TOTAL AND SUB-SCORES and Brain MRI**
+. capture drop sample3
+{txt}
+{com}. gen sample3=.
+{txt}(502,389 missing values generated)
+
+{com}. replace sample3=1 if sample2==1 & sample3A==1 & sample3B==1
+{txt}(38,806 real changes made)
+
+{com}. replace sample3=0 if sample3~=1
+{txt}(463,583 real changes made)
+
+{com}. 
+. tab sample3
+
+    {txt}sample3 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}    463,583       92.28       92.28
+{txt}          1 {c |}{res}     38,806        7.72      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    502,389      100.00
+{txt}
+{com}. 
+. **Sample 4: final sample: exclude prevalent dementia cases and incident dementia cases within a year**
+. stset Age_dementia, failure(dem_diag==1) enter(baselineage) id(n_eid) scale(1)
+
+{txt}Survival-time data settings
+
+{col 12}ID variable: {res}n_eid
+{col 10}{txt}Failure event: {res}dem_diag==1
+{col 1}{txt}Observed time interval: {res}(Age_dementia[_n-1], Age_dementia]
+{col 6}{txt}Enter on or after: {res}time baselineage
+{col 6}{txt}Exit on or before: {res}failure
+
+{txt}{hline 74}
+{res}    502,389{txt}  total observations
+{res}          3{txt}  event time missing (Age_dementia>=.){col 61}PROBABLE ERROR
+{res}        228{txt}  observations end on or before {bf:enter()}
+{hline 74}
+{res}    502,158{txt}  observations remaining, representing
+{res}    502,158{txt}  subjects
+{res}      7,668{txt}  failures in single-failure-per-subject data
+{res}  6,208,727{txt}  total analysis time at risk and under observation
+                                                At risk from t = {res}        0
+                                     {txt}Earliest observed entry t = {res} 37.41821
+                                          {txt}Last observed exit t = {res} 87.63313
+{txt}
+{com}. 
+. capture drop sample4
+{txt}
+{com}. gen sample4=.
+{txt}(502,389 missing values generated)
+
+{com}. replace sample4=1 if (sample3==1 & priordem==0 & _t~=.) | (sample3==1 & time01_1Ayears>1 & time01_1Ayears~=. & dem_diag==1 & _t~=.)
+{txt}(38,803 real changes made)
+
+{com}. replace sample4=0 if sample4~=1
+{txt}(463,586 real changes made)
+
+{com}. 
+. tab sample4
+
+    {txt}sample4 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}    463,586       92.28       92.28
+{txt}          1 {c |}{res}     38,803        7.72      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    502,389      100.00
+{txt}
+{com}. 
+. capture drop sample_final
+{txt}
+{com}. gen sample_final=sample4
+{txt}
+{com}. 
+. tab sample_final
+
+{txt}sample_fina {c |}
+          l {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}    463,586       92.28       92.28
+{txt}          1 {c |}{res}     38,803        7.72      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    502,389      100.00
+{txt}
+{com}. 
+. 
+. save, replace
+{txt}{p 0 4 2}
+file {bf}
+UKB_PAPER4B_LE8INFECTMRI_NODDI.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. ///////////////////////////GENERATE STANDARDIZED MEASURED WITHIN FINAL ANALYTIC SAMPLE/////////////////////////
+> 
+. capture drop zFA_*
+{txt}
+{com}. foreach x2 of varlist FA_* {c -(}
+{txt}  2{com}.         egen z`x2'=std(`x2') if sample_final==1
+{txt}  3{com}. {c )-}
+{txt}(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+
+{com}. 
+. 
+. capture drop zMD_*
+{txt}
+{com}. foreach x3 of varlist MD_* {c -(}
+{txt}  2{com}.         egen z`x3'=std(`x3') if sample_final==1
+{txt}  3{com}. {c )-}
+{txt}(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+
+{com}. 
+. 
+. capture drop zISOVF_*
+{txt}
+{com}. foreach x4 of varlist ISOVF_* {c -(}
+{txt}  2{com}.         egen z`x4'=std(`x4') if sample_final==1
+{txt}  3{com}. {c )-}
+{txt}(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+
+{com}. 
+. 
+. capture drop zICVF_*
+{txt}
+{com}. foreach x5 of varlist ICVF_* {c -(}
+{txt}  2{com}.         egen z`x5'=std(`x5') if sample_final==1
+{txt}  3{com}. {c )-}
+{txt}(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+
+{com}. 
+. 
+. capture drop zOD_*
+{txt}
+{com}. foreach x6 of varlist OD_* {c -(}
+{txt}  2{com}.         egen z`x6'=std(`x6') if sample_final==1
+{txt}  3{com}. {c )-}
+{txt}(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+(463,586 missing values generated)
+
+{com}. 
+. 
+. 
+. save, replace
+{txt}{p 0 4 2}
+file {bf}
+UKB_PAPER4B_LE8INFECTMRI_NODDI.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. //STEP 16: DETERMINE DIFFERENCES IN FINAL ANALYTIC SAMPLE VS. EXCLUDED SAMPLE BY BASIC SOCIO-DEMOGRAPHICS and generate inverse mills ratio//
+. 
+. capture drop RACE_ETHN
+{txt}
+{com}. gen RACE_ETHN=ethnicity2
+{txt}
+{com}. 
+. 
+. logistic sample_final baselineage sex i.RACE_ETHN 
+{res}
+{txt}{col 1}Logistic regression{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:502,386}
+{txt}{col 56}{lalign 13:LR chi2({res:5})}{col 69} = {res}{ralign 7:2569.10}
+{txt}{col 56}{lalign 13:Prob > chi2}{col 69} = {res}{ralign 7:0.0000}
+{txt}{col 1}{lalign 14:Log likelihood}{col 15} = {res}{ralign 10:-135349.27}{txt}{col 56}{lalign 13:Pseudo R2}{col 69} = {res}{ralign 7:0.0094}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}sample_final{col 14}{c |} Odds ratio{col 26}   Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 1}baselineage {c |}{col 14}{res}{space 2} .9728901{col 26}{space 2} .0006293{col 37}{space 1}  -42.49{col 46}{space 3}0.000{col 54}{space 4} .9716575{col 67}{space 3} .9741242
+{txt}{space 9}sex {c |}{col 14}{res}{space 2} .9302991{col 26}{space 2} .0098809{col 37}{space 1}   -6.80{col 46}{space 3}0.000{col 54}{space 4} .9111331{col 67}{space 3} .9498682
+{txt}{space 12} {c |}
+{space 3}RACE_ETHN {c |}
+{space 10}1  {c |}{col 14}{res}{space 2}  .311369{col 26}{space 2} .0205112{col 37}{space 1}  -17.71{col 46}{space 3}0.000{col 54}{space 4} .2736548{col 67}{space 3} .3542809
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .4252869{col 26}{space 2}  .022222{col 37}{space 1}  -16.36{col 46}{space 3}0.000{col 54}{space 4} .3838886{col 67}{space 3} .4711497
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .5522226{col 26}{space 2} .0235199{col 37}{space 1}  -13.94{col 46}{space 3}0.000{col 54}{space 4}  .507996{col 67}{space 3} .6002996
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}   .45635{col 26}{space 2} .0183634{col 37}{space 1}  -19.50{col 46}{space 3}0.000{col 54}{space 4} .4217412{col 67}{space 3}  .493799
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {bf:_cons} estimates baseline odds{txt}.{p_end}
+
+{com}. 
+. 
+. save, replace
+{txt}{p 0 4 2}
+file {bf}
+UKB_PAPER4B_LE8INFECTMRI_NODDI.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. 
+. xi:probit sample_final baselineage sex i.RACE_ETHN
+{txt}i.RACE_ETHN{col 19}_IRACE_ETHN_0-3{col 39}(naturally coded; _IRACE_ETHN_0 omitted)
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-136633.82}  
+Iteration 1:{space 3}log likelihood = {res:-135338.87}  
+Iteration 2:{space 3}log likelihood = {res:-135324.55}  
+Iteration 3:{space 3}log likelihood = {res:-135324.51}  
+Iteration 4:{space 3}log likelihood = {res:-135324.51}  
+{res}
+{txt}{col 1}Probit regression{col 56}{lalign 13:Number of obs}{col 69} = {res}{ralign 7:502,386}
+{txt}{col 56}{lalign 13:LR chi2({res:5})}{col 69} = {res}{ralign 7:2618.61}
+{txt}{col 56}{lalign 13:Prob > chi2}{col 69} = {res}{ralign 7:0.0000}
+{txt}{col 1}{lalign 14:Log likelihood}{col 15} = {res}{ralign 10:-135324.51}{txt}{col 56}{lalign 13:Pseudo R2}{col 69} = {res}{ralign 7:0.0096}
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1} sample_final{col 15}{c |} Coefficient{col 27}  Std. err.{col 39}      z{col 47}   P>|z|{col 55}     [95% con{col 68}f. interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}baselineage {c |}{col 15}{res}{space 2}-.0139835{col 27}{space 2} .0003257{col 38}{space 1}  -42.93{col 47}{space 3}0.000{col 55}{space 4}-.0146219{col 68}{space 3}-.0133451
+{txt}{space 10}sex {c |}{col 15}{res}{space 2}-.0382865{col 27}{space 2} .0052504{col 38}{space 1}   -7.29{col 47}{space 3}0.000{col 55}{space 4}-.0485771{col 68}{space 3}-.0279958
+{txt}_IRACE_ETHN_1 {c |}{col 15}{res}{space 2}-.5441425{col 27}{space 2} .0282896{col 38}{space 1}  -19.23{col 47}{space 3}0.000{col 55}{space 4}-.5995891{col 68}{space 3}-.4886959
+{txt}_IRACE_ETHN_2 {c |}{col 15}{res}{space 2}-.4052211{col 27}{space 2}  .023323{col 38}{space 1}  -17.37{col 47}{space 3}0.000{col 55}{space 4}-.4509333{col 68}{space 3}-.3595088
+{txt}_IRACE_ETHN_3 {c |}{col 15}{res}{space 2} -.284311{col 27}{space 2} .0196648{col 38}{space 1}  -14.46{col 47}{space 3}0.000{col 55}{space 4}-.3228532{col 68}{space 3}-.2457688
+{txt}{space 8}_cons {c |}{col 15}{res}{space 2}-.5575898{col 27}{space 2} .0204354{col 38}{space 1}  -27.29{col 47}{space 3}0.000{col 55}{space 4}-.5976424{col 68}{space 3}-.5175372
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. capture drop p1MRIINF
+{txt}
+{com}. predict p1MRIINF, xb
+{txt}(3 missing values generated)
+
+{com}. 
+. capture drop phiMRIINF
+{txt}
+{com}. capture drop caphiMRIINF
+{txt}
+{com}. capture drop invmillsMRIINF
+{txt}
+{com}. 
+. gen phiMRIINF=(1/sqrt(2*_pi))*exp(-(p1MRIINF^2/2))
+{txt}(3 missing values generated)
+
+{com}. 
+. egen caphiMRIINF=std(p1MRIINF)
+{txt}(3 missing values generated)
+
+{com}. 
+. capture drop invmillsMRIINF
+{txt}
+{com}. gen invmillsMRIINF=phiMRIINF/caphiMRIINF
+{txt}(3 missing values generated)
+
+{com}. 
+. 
+. su invmillsMRIINF
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+invmillsMR~F {c |}{res}    502,386    .6947878    75.01703  -584.8448   9007.412
+{txt}
+{com}. 
+. save , replace
+{txt}{p 0 4 2}
+file {bf}
+UKB_PAPER4B_LE8INFECTMRI_NODDI.dta{rm}
+saved
+{p_end}
+
+{com}. 
+. 
+. 
+. capture log close
+{smcl}
+{com}{sf}{ul off}

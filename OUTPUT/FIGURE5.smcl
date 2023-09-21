@@ -1,0 +1,204 @@
+{smcl}
+{com}{sf}{ul off}{txt}
+{com}. 
+. **********************************************************COGN VS. NODDI MEASURES*************************
+. 
+. use finaldata_unimputedFINAL,clear 
+{txt}
+{com}. 
+. 
+. lowess zISOVF_mean  POORCOGN if sample_final==1 & zISOVF_mean<5 & zISOVF_mean>-5
+{res}{txt}
+{com}. graph save ISOVF_COGN.gph, replace
+{res}{txt}file {bf:ISOVF_COGN.gph} saved
+
+{com}. 
+. lowess zICVF_mean  POORCOGN if sample_final==1 & zICVF_mean<5 & zICVF_mean>-5
+{res}{txt}
+{com}. graph save ICVF_COGN.gph,replace
+{res}{txt}file {bf:ICVF_COGN.gph} saved
+
+{com}. 
+. 
+. lowess zOD_mean  POORCOGN if sample_final==1 & zOD_mean<5 & zOD_mean>-5
+{res}{txt}
+{com}. graph save OD_COGN.gph,replace
+{res}{txt}file {bf:OD_COGN.gph} saved
+
+{com}. 
+. graph matrix zISOVF_mean zICVF_mean zOD_mean if sample_final==1 & zISOVF_mean<5 & zISOVF_mean>-5 & zICVF_mean<5 & zICVF_mean>-5 & zOD_mean<5 & zOD_mean>-5
+{res}{txt}
+{com}. graph save NODDI_SCATTER.gph,replace
+{res}{txt}file {bf:NODDI_SCATTER.gph} saved
+
+{com}. 
+. 
+. graph combine "ISOVF_COGN.gph" "ICVF_COGN.gph" "OD_COGN.gph" "NODDI_SCATTER.gph"
+{res}{txt}
+{com}. graph save NODDI_COGN.gph,replace
+{res}{txt}file {bf:NODDI_COGN.gph} saved
+
+{com}. 
+. pwcorr zISOVF_mean zICVF_mean zOD_mean POORCOGN if sample_final==1 & zISOVF_mean<5 & zISOVF_mean>-5 & zICVF_mean<5 & zICVF_mean>-5 & zOD_mean<5 & zOD_mean>-5, sig
+
+             {txt}{c |} zISOVF~n zICVF_~n zOD_mean POORCOGN
+{hline 13}{c +}{hline 36}
+ zISOVF_mean {c |} {res}  1.0000 
+             {txt}{c |}
+             {c |}
+  zICVF_mean {c |} {res} -0.2158   1.0000 
+             {txt}{c |}{res}   0.0000
+             {txt}{c |}
+    zOD_mean {c |} {res}  0.2955  -0.0942   1.0000 
+             {txt}{c |}{res}   0.0000   0.0000
+             {txt}{c |}
+    POORCOGN {c |} {res}  0.1291  -0.1135   0.1009   1.0000 
+             {txt}{c |}{res}   0.0000   0.0000   0.0000
+             {txt}{c |}
+
+{com}. 
+. su zISOVF_mean zICVF_mean zOD_mean if sample_final==1 & zISOVF_mean<5 & zISOVF_mean>-5 & zICVF_mean<5 & zICVF_mean>-5 & zOD_mean<5 & zOD_mean>-5
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}zISOVF_mean {c |}{res}     38,716   -.0069687    .9793151   -3.57592   4.972591
+{txt}{space 2}zICVF_mean {c |}{res}     38,716   -.0015772     .952794  -4.921672   4.528325
+{txt}{space 4}zOD_mean {c |}{res}     38,716   -.0130507    .9212545  -2.676899   4.998987
+{txt}
+{com}. 
+. *********BIVARIATE MODEL********
+. 
+. reg zISOVF_mean POORCOGN  if  sample_final==1 & zISOVF_mean<5 & zISOVF_mean>-5 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    36,223
+{txt}{hline 13}{c +}{hline 34}   F(1, 36221)     = {res}   623.05
+{txt}       Model {c |} {res} 594.303863         1  594.303863   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 34549.7404    36,221  .953859374   {txt}R-squared       ={res}    0.0169
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0169
+{txt}       Total {c |} {res} 35144.0442    36,222  .970240303   {txt}Root MSE        =   {res} .97666
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1} zISOVF_mean{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}POORCOGN {c |}{col 14}{res}{space 2} .1052752{col 26}{space 2} .0042176{col 37}{space 1}   24.96{col 46}{space 3}0.000{col 54}{space 4} .0970086{col 67}{space 3} .1135418
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0301693{col 26}{space 2} .0052834{col 37}{space 1}    5.71{col 46}{space 3}0.000{col 54}{space 4} .0198136{col 67}{space 3}  .040525
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. reg zICVF_mean POORCOGN if  sample_final==1 &  zICVF_mean<5 & zICVF_mean>-5 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    36,231
+{txt}{hline 13}{c +}{hline 34}   F(1, 36229)     = {res}   485.22
+{txt}       Model {c |} {res} 439.054481         1  439.054481   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 32781.9931    36,229  .904855035   {txt}R-squared       ={res}    0.0132
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0132
+{txt}       Total {c |} {res} 33221.0476    36,230  .916948594   {txt}Root MSE        =   {res} .95124
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}  zICVF_mean{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}POORCOGN {c |}{col 14}{res}{space 2}-.0904638{col 26}{space 2} .0041068{col 37}{space 1}  -22.03{col 46}{space 3}0.000{col 54}{space 4}-.0985133{col 67}{space 3}-.0824143
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-.0333517{col 26}{space 2} .0051447{col 37}{space 1}   -6.48{col 46}{space 3}0.000{col 54}{space 4}-.0434355{col 67}{space 3} -.023268
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. reg zOD_mean POORCOGN  if  sample_final==1 & zOD_mean<5 & zOD_mean>-5 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    36,203
+{txt}{hline 13}{c +}{hline 34}   F(1, 36201)     = {res}   381.57
+{txt}       Model {c |} {res} 323.107832         1  323.107832   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 30654.2373    36,201  .846778742   {txt}R-squared       ={res}    0.0104
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0104
+{txt}       Total {c |} {res} 30977.3451    36,202   .85568049   {txt}Root MSE        =   {res} .92021
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    zOD_mean{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}POORCOGN {c |}{col 14}{res}{space 2} .0776395{col 26}{space 2} .0039746{col 37}{space 1}   19.53{col 46}{space 3}0.000{col 54}{space 4} .0698492{col 67}{space 3} .0854298
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0150728{col 26}{space 2} .0049795{col 37}{space 1}    3.03{col 46}{space 3}0.002{col 54}{space 4} .0053129{col 67}{space 3} .0248326
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ********FULL MODEL*************
+. 
+. reg zISOVF_mean POORCOGN AGE SEX  NonWhite householdsize TIME_V0V2 LE8_TOTALSCORE AD_PGS invmillsMRIINF  if  sample_final==1 & zISOVF_mean<5 & zISOVF_mean>-5 & zICVF_mean<5 & zICVF_mean>-5 & zOD_mean<5 & zOD_mean>-5 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    36,090
+{txt}{hline 13}{c +}{hline 34}   F(9, 36080)     = {res}  1019.25
+{txt}       Model {c |} {res} 7037.12988         9   781.90332   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 27678.2575    36,080   .76713574   {txt}R-squared       ={res}    0.2027
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2025
+{txt}       Total {c |} {res} 34715.3874    36,089  .961938191   {txt}Root MSE        =   {res} .87586
+
+{txt}{hline 15}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}   zISOVF_mean{col 16}{c |} Coefficient{col 28}  Std. err.{col 40}      t{col 48}   P>|t|{col 56}     [95% con{col 69}f. interval]
+{hline 15}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}POORCOGN {c |}{col 16}{res}{space 2} .0153747{col 28}{space 2} .0039497{col 39}{space 1}    3.89{col 48}{space 3}0.000{col 56}{space 4} .0076332{col 69}{space 3} .0231161
+{txt}{space 11}AGE {c |}{col 16}{res}{space 2} .0539295{col 28}{space 2} .0006892{col 39}{space 1}   78.25{col 48}{space 3}0.000{col 56}{space 4} .0525787{col 69}{space 3} .0552803
+{txt}{space 11}SEX {c |}{col 16}{res}{space 2}-.1098836{col 28}{space 2} .0094194{col 39}{space 1}  -11.67{col 48}{space 3}0.000{col 56}{space 4}-.1283458{col 69}{space 3}-.0914213
+{txt}{space 6}NonWhite {c |}{col 16}{res}{space 2} .0367182{col 28}{space 2} .0603458{col 39}{space 1}    0.61{col 48}{space 3}0.543{col 56}{space 4}-.0815613{col 69}{space 3} .1549977
+{txt}{space 1}householdsize {c |}{col 16}{res}{space 2}-.0167633{col 28}{space 2} .0040586{col 39}{space 1}   -4.13{col 48}{space 3}0.000{col 56}{space 4}-.0247182{col 69}{space 3}-.0088085
+{txt}{space 5}TIME_V0V2 {c |}{col 16}{res}{space 2} .0001763{col 28}{space 2} 7.29e-06{col 39}{space 1}   24.19{col 48}{space 3}0.000{col 56}{space 4}  .000162{col 69}{space 3} .0001906
+{txt}LE8_TOTALSCORE {c |}{col 16}{res}{space 2}-.0003298{col 28}{space 2} .0000511{col 39}{space 1}   -6.45{col 48}{space 3}0.000{col 56}{space 4}  -.00043{col 69}{space 3}-.0002297
+{txt}{space 8}AD_PGS {c |}{col 16}{res}{space 2} .0070367{col 28}{space 2} .0046754{col 39}{space 1}    1.51{col 48}{space 3}0.132{col 56}{space 4}-.0021272{col 69}{space 3} .0162006
+{txt}invmillsMRIINF {c |}{col 16}{res}{space 2}-.0000389{col 28}{space 2}   .00004{col 39}{space 1}   -0.97{col 48}{space 3}0.331{col 56}{space 4}-.0001173{col 69}{space 3} .0000395
+{txt}{space 9}_cons {c |}{col 16}{res}{space 2}-3.225393{col 28}{space 2} .0821539{col 39}{space 1}  -39.26{col 48}{space 3}0.000{col 56}{space 4}-3.386418{col 69}{space 3}-3.064369
+{txt}{hline 15}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. reg zICVF_mean POORCOGN AGE SEX  NonWhite householdsize TIME_V0V2 LE8_TOTALSCORE AD_PGS invmillsMRIINF if  sample_final==1 & zISOVF_mean<5 & zISOVF_mean>-5 & zICVF_mean<5 & zICVF_mean>-5 & zOD_mean<5 & zOD_mean>-5 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    36,090
+{txt}{hline 13}{c +}{hline 34}   F(9, 36080)     = {res}   441.70
+{txt}       Model {c |} {res} 3260.27242         9  362.252491   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  29590.471    36,080  .820135004   {txt}R-squared       ={res}    0.0992
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0990
+{txt}       Total {c |} {res} 32850.7434    36,089  .910270259   {txt}Root MSE        =   {res} .90561
+
+{txt}{hline 15}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    zICVF_mean{col 16}{c |} Coefficient{col 28}  Std. err.{col 40}      t{col 48}   P>|t|{col 56}     [95% con{col 69}f. interval]
+{hline 15}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}POORCOGN {c |}{col 16}{res}{space 2} -.026446{col 28}{space 2} .0040838{col 39}{space 1}   -6.48{col 48}{space 3}0.000{col 56}{space 4}-.0344504{col 69}{space 3}-.0184415
+{txt}{space 11}AGE {c |}{col 16}{res}{space 2}-.0381414{col 28}{space 2} .0007126{col 39}{space 1}  -53.53{col 48}{space 3}0.000{col 56}{space 4}-.0395381{col 69}{space 3}-.0367447
+{txt}{space 11}SEX {c |}{col 16}{res}{space 2}-.0026979{col 28}{space 2} .0097393{col 39}{space 1}   -0.28{col 48}{space 3}0.782{col 56}{space 4}-.0217873{col 69}{space 3} .0163914
+{txt}{space 6}NonWhite {c |}{col 16}{res}{space 2} -.105295{col 28}{space 2} .0623955{col 39}{space 1}   -1.69{col 48}{space 3}0.092{col 56}{space 4} -.227592{col 69}{space 3} .0170021
+{txt}{space 1}householdsize {c |}{col 16}{res}{space 2} .0101277{col 28}{space 2} .0041964{col 39}{space 1}    2.41{col 48}{space 3}0.016{col 56}{space 4} .0019026{col 69}{space 3} .0183527
+{txt}{space 5}TIME_V0V2 {c |}{col 16}{res}{space 2}-6.66e-06{col 28}{space 2} 7.54e-06{col 39}{space 1}   -0.88{col 48}{space 3}0.377{col 56}{space 4}-.0000214{col 69}{space 3} 8.11e-06
+{txt}LE8_TOTALSCORE {c |}{col 16}{res}{space 2}-.0000122{col 28}{space 2} .0000528{col 39}{space 1}   -0.23{col 48}{space 3}0.818{col 56}{space 4}-.0001157{col 69}{space 3} .0000914
+{txt}{space 8}AD_PGS {c |}{col 16}{res}{space 2} -.011653{col 28}{space 2} .0048342{col 39}{space 1}   -2.41{col 48}{space 3}0.016{col 56}{space 4}-.0211282{col 69}{space 3}-.0021778
+{txt}invmillsMRIINF {c |}{col 16}{res}{space 2} .0000173{col 28}{space 2} .0000414{col 39}{space 1}    0.42{col 48}{space 3}0.675{col 56}{space 4}-.0000637{col 69}{space 3} .0000984
+{txt}{space 9}_cons {c |}{col 16}{res}{space 2} 2.219163{col 28}{space 2} .0849444{col 39}{space 1}   26.12{col 48}{space 3}0.000{col 56}{space 4}  2.05267{col 69}{space 3} 2.385657
+{txt}{hline 15}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. reg zOD_mean POORCOGN AGE SEX  NonWhite householdsize TIME_V0V2 LE8_TOTALSCORE AD_PGS invmillsMRIINF if  sample_final==1 & zISOVF_mean<5 & zISOVF_mean>-5 & zICVF_mean<5 & zICVF_mean>-5 & zOD_mean<5 & zOD_mean>-5 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    36,090
+{txt}{hline 13}{c +}{hline 34}   F(9, 36080)     = {res}   407.36
+{txt}       Model {c |} {res} 2822.79158         9  313.643508   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 27779.3402    36,080  .769937366   {txt}R-squared       ={res}    0.0922
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0920
+{txt}       Total {c |} {res} 30602.1317    36,089  .847962862   {txt}Root MSE        =   {res} .87746
+
+{txt}{hline 15}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      zOD_mean{col 16}{c |} Coefficient{col 28}  Std. err.{col 40}      t{col 48}   P>|t|{col 56}     [95% con{col 69}f. interval]
+{hline 15}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}POORCOGN {c |}{col 16}{res}{space 2} .0318676{col 28}{space 2} .0039569{col 39}{space 1}    8.05{col 48}{space 3}0.000{col 56}{space 4}  .024112{col 69}{space 3} .0396232
+{txt}{space 11}AGE {c |}{col 16}{res}{space 2} .0250183{col 28}{space 2} .0006904{col 39}{space 1}   36.24{col 48}{space 3}0.000{col 56}{space 4} .0236651{col 69}{space 3} .0263716
+{txt}{space 11}SEX {c |}{col 16}{res}{space 2} .0743421{col 28}{space 2} .0094366{col 39}{space 1}    7.88{col 48}{space 3}0.000{col 56}{space 4} .0558461{col 69}{space 3}  .092838
+{txt}{space 6}NonWhite {c |}{col 16}{res}{space 2} -.235008{col 28}{space 2} .0604559{col 39}{space 1}   -3.89{col 48}{space 3}0.000{col 56}{space 4}-.3535032{col 69}{space 3}-.1165127
+{txt}{space 1}householdsize {c |}{col 16}{res}{space 2}-.0197372{col 28}{space 2}  .004066{col 39}{space 1}   -4.85{col 48}{space 3}0.000{col 56}{space 4}-.0277066{col 69}{space 3}-.0117678
+{txt}{space 5}TIME_V0V2 {c |}{col 16}{res}{space 2} .0002515{col 28}{space 2} 7.30e-06{col 39}{space 1}   34.45{col 48}{space 3}0.000{col 56}{space 4} .0002372{col 69}{space 3} .0002659
+{txt}LE8_TOTALSCORE {c |}{col 16}{res}{space 2}-.0009568{col 28}{space 2} .0000512{col 39}{space 1}  -18.69{col 48}{space 3}0.000{col 56}{space 4}-.0010571{col 69}{space 3}-.0008564
+{txt}{space 8}AD_PGS {c |}{col 16}{res}{space 2} .0044455{col 28}{space 2} .0046839{col 39}{space 1}    0.95{col 48}{space 3}0.343{col 56}{space 4}-.0047352{col 69}{space 3} .0136261
+{txt}invmillsMRIINF {c |}{col 16}{res}{space 2}-.0000402{col 28}{space 2} .0000401{col 39}{space 1}   -1.00{col 48}{space 3}0.315{col 56}{space 4}-.0001188{col 69}{space 3} .0000383
+{txt}{space 9}_cons {c |}{col 16}{res}{space 2}-1.540102{col 28}{space 2} .0823038{col 39}{space 1}  -18.71{col 48}{space 3}0.000{col 56}{space 4} -1.70142{col 69}{space 3}-1.378784
+{txt}{hline 15}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. capture log close
+{smcl}
+{com}{sf}{ul off}
