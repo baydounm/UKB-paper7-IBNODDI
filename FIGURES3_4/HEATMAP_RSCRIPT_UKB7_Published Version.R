@@ -4,13 +4,14 @@
 #######  Programmer: Yi-Han Hu
 #######  Date: Mar. 01 2023
 #######  Final Update: Mar. 15 2023
+#######  Revision: Sep. 13 2023
 #######################################################################
 
 op <- options(nwarnings = 10000)
 # --------------------------------------
 # Specify working directory where the script and data files are
 # --------------------------------------
-WorkingDirectory = "file location"
+WorkingDirectory = ""
 
 # --------------------------------------
 # Set working directory
@@ -31,6 +32,11 @@ library(dplyr)
 library(stringr)
 library(ggplot2)
 library(RColorBrewer)
+
+library(broom)
+library(stats)
+library(purrr)
+library(data.table)
 
 # ---------------------------------------------------------------------------------------------#
 # ---------------------------------------------------------------------------------------------#
@@ -71,8 +77,10 @@ colnames(Cprime_overall)
 # Heatmap for ISOVF, ICVF and OD
 # --------------------------------------
 heatmap <- function(data, stratified_by = "AD_PGStert", modality.cat = "ICVF", sig.basedon.p = FALSE, hide.unsig = TRUE){
-  myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))
-
+  myPalette <- rev(brewer.pal(11, "Spectral"))
+  # set limits based on the maximum absolute value across all exposure-outcome pairs to ensure consistency.
+  max_abs_value <- max(abs(c(range(data$estimate))))
+  
   if (stratified_by == "AD_PGStert"){
     data <- data %>% mutate(tert = AD_PGStert) %>% mutate(predictor = ifelse(parm=="infectionburdenhosptert", "IB(hosp)", "IB(total)"),
                                                                  term_new = paste("PGS_tert", tert, "_", predictor, sep = ""))
@@ -105,6 +113,8 @@ heatmap <- function(data, stratified_by = "AD_PGStert", modality.cat = "ICVF", s
     arrange(desc(ROI), tert, predictor) %>% 
     filter(modality == modality.cat)
 
+
+  
   if (hide.unsig == TRUE){
     p.plot <- ggplot(data = data.long, aes(x = factor(term_new), y = factor(ROI)))+
       geom_tile(color = data.long$bg.line, fill = data.long$bg.color)+
@@ -113,8 +123,11 @@ heatmap <- function(data, stratified_by = "AD_PGStert", modality.cat = "ICVF", s
                      fill=estimate))+
       geom_text(aes(label = asterisk), size = 6) +
       scale_shape_manual(values=c(1, 21), guide = "none")+
-      scale_fill_gradientn(colours = myPalette(100), aesthetics = c("colour","fill"))+
-      scale_size_manual(values=c(6, 4, 2), labels = c("< .01", "< .05", "\u2265 .05"))+
+      scale_fill_gradientn(colours = myPalette, 
+                           limits = c(-max_abs_value, max_abs_value),
+                           aesthetics = c("colour","fill")) +
+      scale_size_manual(values=c(6, 4, 2), labels = c("< .01", "< .05", "\u2265 .05")) +
+      guides(size = guide_legend(override.aes = list(shape = 21, fill = c("black", "black", "white")))) +
       labs(title=paste("Heatmap (", "Infection burden", " and ", modality.cat," metrics)", sep = ""),
            subtitle=paste("Stratified by ", tert_name, " tertiles", sep = ""),
            x=paste("Infection burden"," by ", tert_name, " strata", sep = ""),
@@ -135,8 +148,10 @@ heatmap <- function(data, stratified_by = "AD_PGStert", modality.cat = "ICVF", s
       geom_point(aes(size=factor(ap), 
                      fill=estimate),shape=21)+
       geom_text(aes(label = asterisk), size = 6) +
-      scale_fill_gradientn(colours = myPalette(100), aesthetics = c("colour","fill"))+
-      scale_size_manual(values=c(6, 4, 2), labels = c("< .01", "< .05", "\u2265 .05"))+
+      scale_fill_gradientn(colours = myPalette, 
+                           limits = c(-max_abs_value, max_abs_value),
+                           aesthetics = c("colour","fill"))+
+      scale_size_manual(values=c(6, 4, 2), labels = c("< .01", "< .05", "\u2265 .05")) +
       labs(title=paste("Heatmap (", "Infection burden", " and ", modality.cat," metrics)", sep = ""),
            subtitle=paste("Stratified by ", tert_name, " tertiles", sep = ""),
            x=paste("Infection burden"," by ", tert_name, " strata", sep = ""),
@@ -165,5 +180,12 @@ for (modality in modality.list){
   # LE8 plots
   LE8.hide.unsig <- heatmap(data = Cprime_overall, stratified_by = "LE8_TOTALSCOREtert", modality.cat = modality, sig.basedon.p = FALSE, hide.unsig = TRUE)
   ggsave(paste(WorkingDirectory,"Output//Plot//", modality, "_LE8tert_hide_unsig.jpeg",sep=""), LE8.hide.unsig, width = 8.5, height = 11, units = "in", dpi = 300)
-  
+
+  # AD plots
+  AD.plot <- heatmap(data = Dprime_overall, stratified_by = "AD_PGStert", modality.cat = modality, sig.basedon.p = FALSE, hide.unsig = FALSE)
+  ggsave(paste(WorkingDirectory,"Output//Plot//", modality, "_ADtert.jpeg",sep=""), AD.plot, width = 8.5, height = 11, units = "in", dpi = 300)
+
+  # LE8 plots
+  LE8.plot <- heatmap(data = Cprime_overall, stratified_by = "LE8_TOTALSCOREtert", modality.cat = modality, sig.basedon.p = FALSE, hide.unsig = FALSE)
+  ggsave(paste(WorkingDirectory,"Output//Plot//", modality, "_LE8tert.jpeg",sep=""), LE8.plot, width = 8.5, height = 11, units = "in", dpi = 300)
 }
